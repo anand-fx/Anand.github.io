@@ -76,7 +76,7 @@ section{padding:7rem 0;scroll-margin-top:68px}
 .hero-status-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block;animation:statusPulse 2.5s ease-in-out infinite}
 @keyframes statusPulse{0%{box-shadow:0 0 0 0 rgba(30,100,255,.4)}70%{box-shadow:0 0 0 7px rgba(30,100,255,0)}100%{box-shadow:0 0 0 0 rgba(30,100,255,0)}}
 
-.hero-name{font-family:var(--display);font-size:clamp(4rem,10vw,8.5rem);color:var(--white);line-height:.92;letter-spacing:.08em;margin-bottom:0;opacity:0;animation:fadeUp .9s ease .35s forwards;font-weight:400}
+.hero-name{font-family:var(--display);font-size:clamp(3rem,10vw,8.5rem);color:var(--white);line-height:.92;letter-spacing:.08em;margin-bottom:0;opacity:0;animation:fadeUp .9s ease .35s forwards;font-weight:400;word-break:break-word}
 .hero-name em{display:block;color:transparent;-webkit-text-stroke:1px rgba(30,100,255,.65);font-style:normal}
 
 .hero-divider{display:flex;align-items:center;justify-content:center;gap:1.2rem;margin:2.2rem 0 1.8rem;opacity:0;animation:fadeUp .6s ease .6s forwards}
@@ -229,9 +229,8 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
 @media(max-width:1024px){
   nav{padding:1rem 2rem}
   .wrap{padding:0 2rem}
-  .hero-inner{grid-template-columns:1fr 280px;gap:2.5rem}
-  .hero-name{font-size:clamp(2.4rem,5vw,4rem)}
-  .stats-strip{flex-wrap:wrap}
+  .hero-name{font-size:clamp(2.5rem,8vw,5rem)}
+  .stats-strip{flex-wrap:wrap;position:absolute;bottom:0}
   .stat-item{flex:1 1 40%;border-bottom:1px solid rgba(30,100,255,.08)}
   .stat-item:nth-child(2){border-right:none}
   .sec-num-large{font-size:7rem;right:2rem}
@@ -257,25 +256,19 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
   .nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
   /* HERO */
-  #hero{min-height:100svh;padding-top:4.5rem;align-items:flex-start}
-  .wrap{padding:0 1.4rem}
-  .hero-inner{grid-template-columns:1fr;gap:2rem}
-  .hero-right{order:3}
-  .stats-strip{order:4;margin-top:2rem;flex-wrap:wrap;grid-column:unset}
-  .hero-name{font-size:clamp(2.2rem,11vw,3.5rem)}
-  .hero-eyebrow{font-size:10px}
-  .hero-bullets li{font-size:12px}
-  .hero-ctas{flex-direction:column;gap:.75rem}
-  .btn-gold,.btn-out{text-align:center;padding:.7rem 1.4rem}
+  #hero{min-height:100svh;padding:6rem 1.4rem 3rem;display:flex;flex-direction:column;justify-content:center;align-items:center}
+  .wrap{padding:0 1.4rem;width:100%}
+  .hero-name{font-size:clamp(2rem, 9.5vw, 4.2rem);margin-top:1rem}
+  .hero-location{margin-bottom:2rem}
+  .hero-trade-line{margin-bottom:2.5rem}
+  .hero-ctas{flex-direction:column;gap:.75rem;width:100%;max-width:300px;margin:0 auto}
+  .btn-gold,.btn-out{text-align:center;padding:.7rem 1.4rem;width:100%}
 
-  .stats-strip{flex-direction:row;flex-wrap:wrap}
-  .stat-item{flex:1 1 45%;padding:.9rem 1rem;border-right:none;border-bottom:1px solid rgba(30,100,255,.08);text-align:left}
-  .stat-num{font-size:1.6rem}
-
-  /* terminal */
-  .terminal{width:100%}
-  .term-body{padding:1rem}
-  .term-line{font-size:11px}
+  .stats-strip{position:relative;bottom:auto;left:auto;right:auto;margin-top:3.5rem;flex-direction:row;flex-wrap:wrap;border-bottom:1px solid rgba(30,100,255,.08);width:100%}
+  .stat-item{flex:1 1 45%;padding:.9rem 1rem;border-right:none;border-bottom:1px solid rgba(30,100,255,.08);text-align:center}
+  .stat-item:nth-child(odd){border-right:1px solid rgba(30,100,255,.06)}
+  .stat-item:nth-last-child(-n+2){border-bottom:none}
+  .stat-num{font-size:1.5rem}
 
   /* SECTIONS */
   section{padding:4.5rem 0}
@@ -300,8 +293,9 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
 
   /* CONTACT */
   #contact .sec-h{font-size:clamp(1.8rem,8vw,3rem)}
-  .contact-email{font-size:clamp(1rem,4vw,1.5rem);word-break:break-all}
-  .contact-links{flex-direction:column;align-items:center}
+  .contact-email{font-size:clamp(1rem,4.5vw,1.6rem);word-break:break-all;margin-bottom:2rem}
+  .contact-links{flex-direction:column;align-items:center;width:100%;max-width:280px;margin:0 auto}
+  .c-pill{width:100%;justify-content:center}
 
   /* FOOTER */
   footer{flex-direction:column;gap:.5rem;text-align:center;padding:1.5rem}
@@ -312,9 +306,10 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
 
 /* SMALL MOBILE */
 @media(max-width:400px){
-  .hero-name{font-size:clamp(2rem,10vw,2.8rem)}
+  .hero-name{font-size:clamp(1.8rem,9vw,3.2rem)}
   .skills-grid{grid-template-columns:1fr}
-  .stat-item{flex:1 1 100%}
+  .stat-item{flex:1 1 100%;border-right:none !important;border-bottom:1px solid rgba(30,100,255,.08) !important}
+  .stat-item:last-child{border-bottom:none !important}
 }
 
 /* DESKTOP — ensure nav burger hidden */
@@ -379,14 +374,14 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
 
 .ld-lines{
   display:flex;flex-direction:column;gap:.45rem;
-  width:min(440px,90vw);
+  width:min(440px,85vw);
   margin-bottom:2rem;
   opacity:0;
   animation:ldFadeIn .5s ease .7s forwards;
 }
 .ld-line{
   display:flex;align-items:center;gap:.75rem;
-  font-size:12px;color:var(--muted);
+  font-size:clamp(10px, 2.8vw, 12px);color:var(--muted);
   opacity:0;
   transform:translateX(-8px);
   transition:opacity .4s,transform .4s,color .3s;
@@ -398,7 +393,7 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
 .ld-line.done .ld-check{opacity:1}
 
 .ld-bar-wrap{
-  width:min(440px,90vw);
+  width:min(440px,85vw);
   opacity:0;
   animation:ldFadeIn .5s ease .8s forwards;
 }
@@ -497,7 +492,6 @@ section.in-view .sec-wipe{left:100%}
 </head>
 <body>
 
-<!-- ══ LOADING SCREEN ══ -->
 <div id="loader">
   <div class="ld-logo">A<span>P</span></div>
   <div class="ld-fullname">ANAND PANDYA</div>
@@ -517,7 +511,6 @@ section.in-view .sec-wipe{left:100%}
   <div class="ld-enter" id="ld-enter" style="display:none">ACCESS GRANTED</div>
 </div>
 
-<!-- CURSOR -->
 <div class="cursor-dot" id="cd"></div>
 <div class="cursor-ring" id="cr"></div>
 
@@ -526,7 +519,6 @@ section.in-view .sec-wipe{left:100%}
 <div class="dot-grid"></div>
 <div id="flicker-layer"></div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">AP</div>
   <button class="nav-burger" id="burger" aria-label="Menu">
@@ -542,7 +534,6 @@ section.in-view .sec-wipe{left:100%}
   </div>
 </nav>
 
-<!-- ══ HERO ══ -->
 <section id="hero">
   <div class="wrap">
 
@@ -579,7 +570,6 @@ section.in-view .sec-wipe{left:100%}
 
 <div class="divider"></div>
 
-<!-- ══ EXPERIENCE ══ -->
 <section id="experience" style="position:relative">
   <div class="sec-num-large">02</div>
   <div class="wrap">
@@ -642,7 +632,6 @@ section.in-view .sec-wipe{left:100%}
 
 <div class="divider"></div>
 
-<!-- ══ PROJECTS ══ -->
 <section id="projects" style="position:relative">
   <div class="sec-num-large">03</div>
   <div class="wrap">
@@ -743,7 +732,6 @@ section.in-view .sec-wipe{left:100%}
 
 <div class="divider"></div>
 
-<!-- ══ SKILLS ══ -->
 <section id="skills" style="position:relative">
   <div class="sec-num-large">04</div>
   <div class="wrap">
@@ -761,7 +749,6 @@ section.in-view .sec-wipe{left:100%}
 
 <div class="divider"></div>
 
-<!-- ══ EDUCATION + CERTS ══ -->
 <section id="education" style="position:relative">
   <div class="sec-num-large">05</div>
   <div class="wrap">
@@ -791,7 +778,6 @@ section.in-view .sec-wipe{left:100%}
 
 <div class="divider"></div>
 
-<!-- ══ CONTACT ══ -->
 <section id="contact">
   <div class="wrap">
     <div class="sec-num" style="text-align:center">06 / 06</div>
@@ -1119,6 +1105,22 @@ function draw(){
 window.addEventListener('resize',()=>{resize();initParticles()});
 window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
 window.addEventListener('mouseleave',()=>{mouse.x=-9999;mouse.y=-9999});
+
+// Mobile touch interaction engine extensions
+window.addEventListener('touchmove', e => {
+  if(e.touches.length > 0) {
+    mouse.x = e.touches[0].clientX;
+    mouse.y = e.touches[0].clientY;
+  }
+}, { passive: true });
+window.addEventListener('touchstart', e => {
+  if(e.touches.length > 0) {
+    mouse.x = e.touches[0].clientX;
+    mouse.y = e.touches[0].clientY;
+  }
+}, { passive: true });
+window.addEventListener('touchend', () => { mouse.x = -9999; mouse.y = -9999; });
+
 resize(); initParticles(); draw();
 
 /* ══ TYPEWRITER ══ */

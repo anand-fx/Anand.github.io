@@ -120,7 +120,7 @@ section{padding:7rem 0;scroll-margin-top:68px}
 .exp-co{font-size:12px;color:var(--muted);margin-bottom:1.1rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.05)}
 .exp-list{list-style:none;display:flex;flex-direction:column;gap:.4rem}
 .exp-list li{font-size:12.5px;color:var(--text);display:flex;gap:.65rem}
-.exp-list li::before{content:'→';color:var(--gold);flex-shrink:0;font-size:11px;margin-top:.2rem}
+.exp-list li::before{content:'\2192';color:var(--gold);flex-shrink:0;font-size:11px;margin-top:.2rem}
 
 /* highlights */
 .hl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:2.5rem}
@@ -257,22 +257,29 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
   .nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
   /* HERO */
-  #hero{min-height:100svh;padding-top:4.5rem;padding-bottom:0;align-items:center;justify-content:flex-start;flex-direction:column}
+  /* Remove full-screen min-height on mobile so there's no dead space below stats */
+  #hero{min-height:auto;padding-top:5rem;padding-bottom:0;align-items:center;justify-content:flex-start;flex-direction:column}
   #hero .wrap{width:100%;padding-bottom:1.5rem}
   .wrap{padding:0 1.4rem}
   .hero-inner{grid-template-columns:1fr;gap:2rem}
   .hero-right{order:3}
-  /* stats-strip: switch from absolute to in-flow on mobile so it never overlaps content */
-  .stats-strip{position:relative;bottom:auto;left:auto;right:auto;order:4;margin-top:0;flex-wrap:wrap;width:100%}
+  /* stats-strip: in-flow on mobile, 2×2 grid of stats */
+  .stats-strip{
+    position:relative;bottom:auto;left:auto;right:auto;
+    display:flex;flex-direction:row;flex-wrap:wrap;
+    width:100%;margin-top:0;
+    border-top:1px solid rgba(30,100,255,.08)
+  }
+  .stat-item{flex:1 1 48%;padding:.9rem 1rem;border-right:none;border-bottom:1px solid rgba(30,100,255,.08);text-align:left}
+  .stat-num{font-size:1.4rem}
+  /* hero location: prevent it from wrapping to two lines */
+  .hero-location{white-space:nowrap;font-size:9px;gap:.5rem}
+  .hero-location::before,.hero-location::after{width:14px}
   .hero-name{font-size:clamp(2.2rem,11vw,3.5rem)}
   .hero-eyebrow{font-size:10px}
   .hero-bullets li{font-size:12px}
   .hero-ctas{flex-direction:column;gap:.75rem}
   .btn-gold,.btn-out{text-align:center;padding:.7rem 1.4rem}
-
-  .stats-strip{flex-direction:row;flex-wrap:wrap;border-top:1px solid rgba(30,100,255,.08)}
-  .stat-item{flex:1 1 45%;padding:.9rem 1rem;border-right:none;border-bottom:1px solid rgba(30,100,255,.08);text-align:left}
-  .stat-num{font-size:1.6rem}
 
   /* terminal */
   .terminal{width:100%}
@@ -313,9 +320,10 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
 }
 
 /* SMALL MOBILE */
-@media(max-width:400px){
+@media(max-width:380px){
   .hero-name{font-size:clamp(2rem,10vw,2.8rem)}
   .skills-grid{grid-template-columns:1fr}
+  /* only go single-column stats on very small screens */
   .stat-item{flex:1 1 100%}
 }
 
@@ -1149,10 +1157,10 @@ function countUp(el,target,dur,suffix=''){
 const heroObs=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){
     setTimeout(()=>{
-      countUp(document.getElementById('c1'),4,1200,'+');
-      countUp(document.getElementById('c2'),6,1200,'+');
-      countUp(document.getElementById('c3'),19.5,1500,'%');
-      countUp(document.getElementById('c4'),11,1300,'+');
+      countUp(document.getElementById('c1'),4,1200,'');
+      countUp(document.getElementById('c2'),6,1200,'');
+      countUp(document.getElementById('c3'),19.5,1500,'');
+      countUp(document.getElementById('c4'),11,1300,'');
     },900);
     heroObs.unobserve(e.target);
   }});

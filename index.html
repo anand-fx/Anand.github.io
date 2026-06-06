@@ -15,8 +15,8 @@
   --mono:'JetBrains Mono',monospace;--display:'Bebas Neue',sans-serif;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13.5px;line-height:1.7;overflow-x:hidden;cursor:none}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13.5px;line-height:1.7;overflow-x:hidden;cursor:none;max-width:100vw}
 
 .cursor-dot{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
 .cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(30,100,255,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .12s,width .2s,height .2s,border-color .2s}
@@ -108,7 +108,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .acc-item.open .acc-body{grid-template-rows:1fr}
 .acc-inner{padding:0 0 2.5rem}
 
-/* Curtain wipe — each direct child starts hidden, revealed staggered */
+/* Curtain wipe */
 .acc-inner > *{
   opacity:0;
   transform:translateY(-8px);
@@ -121,7 +121,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
   clip-path:inset(0 0 0% 0);
 }
 
-/* Curtain wipe for cards inside grids */
 .acc-inner .exp-card,
 .acc-inner .proj-card,
 .acc-inner .sk-cat,
@@ -144,7 +143,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
   clip-path:inset(0 0 0% 0);
 }
 
-/* scan-line overlay that sweeps down when open */
 .acc-body::after{
   content:'';
   position:absolute;
@@ -166,7 +164,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
   100%{top:100%;opacity:0}
 }
 
-/* Top bar accent */
 .acc-item.open .acc-trigger::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold),var(--gold2),transparent)}
 
 /* ══ EXPERIENCE CONTENT ══ */
@@ -301,11 +298,30 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
   .btn-gold,.btn-out{width:100%;max-width:260px;text-align:center;padding:.65rem 1.2rem}
   .stats-strip{flex-wrap:wrap}
   .stat-item{flex:1 1 48%}
-  .accordion-wrap{padding:0 1.2rem 3rem}
+  /* Mobile accordion padding fix */
+  .accordion-wrap{padding:0 1rem 3rem}
+  .wrap{padding:0 1.2rem}
   .acc-label{font-size:clamp(1.5rem,6vw,2rem)}
-  .exp-grid,.projects-grid{grid-template-columns:1fr}
-  .skills-grid{grid-template-columns:1fr 1fr}
+  /* Mobile grids — single column, no overflow */
+  .exp-grid{grid-template-columns:1fr;min-width:0}
+  .projects-grid{grid-template-columns:1fr;min-width:0}
+  .hl-grid{grid-template-columns:1fr}
+  .sk-cat{min-width:0}
+  .skills-grid{grid-template-columns:1fr 1fr;min-width:0}
   .edu-cert-wrap{grid-template-columns:1fr;gap:2rem}
+  /* Prevent any card from overflowing */
+  .exp-card,.proj-card,.hl-card,.cert-card,.edu-card,.sk-cat{
+    min-width:0;
+    word-break:break-word;
+  }
+  /* Hero title row — wrap safely */
+  .hero-title-tag{font-size:10px;letter-spacing:.14em;white-space:normal;text-align:center}
+  /* Hero meta — wrap */
+  .hero-meta{flex-wrap:wrap;gap:.7rem}
+  /* Trade line — wrap */
+  .hero-trade-line{flex-wrap:wrap;text-align:center}
+  /* Contact email */
+  .contact-email{font-size:clamp(1rem,5vw,1.6rem);word-break:break-all}
   footer{flex-direction:column;gap:.5rem;text-align:center;padding:1.2rem}
 }
 @media(min-width:769px){.nav-burger{display:none}.nav-links{display:flex !important}}
@@ -374,7 +390,7 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
       <a href="#" onclick="openAcc('contact');return false;" class="btn-out">Let's Collaborate</a>
     </div>
     <div class="hero-socials">
-      <a href="https://github.com/anand-fx" target="_blank" rel="noopener" class="hero-social">
+      <a href="https://github.com/anandQuant" target="_blank" rel="noopener" class="hero-social">
         <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GitHub
       </a>
       <a href="https://www.linkedin.com/in/pandyaanand999/" target="_blank" rel="noopener" class="hero-social">
@@ -413,7 +429,7 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
           <div class="exp-card">
             <div class="exp-card-num">01</div>
             <div class="exp-period">Present</div>
-            <div class="exp-role">Quantitative &amp; Discretionary Trader</div>
+            <div class="exp-role">Quantitative Trader &amp; Strategy Developer</div>
             <div class="exp-co">Prop Trading Firm · Dubai</div>
             <ul class="exp-list">
               <li>Managing firm's proprietary book — FX &amp; Crypto</li>
@@ -473,67 +489,67 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
         </div>
         <div class="projects-grid">
           <div class="proj-card lang-cpp" data-lang="cpp">
-            <div class="proj-head"><div class="proj-name">L3 Order Flow Visualizer &amp; Spoofing Detector</div><a class="proj-gh" href="https://github.com/anand-fx/L3-Order-Flow-Visualizer-Spoofing-Detection-Engine" target="_blank">↗</a></div>
+            <div class="proj-head"><div class="proj-name">L3 Order Flow Visualizer &amp; Spoofing Detector</div><a class="proj-gh" href="https://github.com/anandQuant/L3-Order-Flow-Visualizer-Spoofing-Detection-Engine" target="_blank">↗</a></div>
             <div class="proj-desc">C++17 — reads raw L3 market data, renders live DoM terminal, scores every order for spoofing in real time.</div>
             <div class="proj-tags"><span class="proj-tag">HFT</span><span class="proj-tag">Microstructure</span><span class="proj-tag">Spoofing</span></div>
             <div class="proj-meta"><span class="lang-badge">C++17</span></div>
           </div>
           <div class="proj-card lang-cpp" data-lang="cpp">
-            <div class="proj-head"><div class="proj-name">L3 Order Book Matching System</div><a class="proj-gh" href="https://github.com/anand-fx/Level-3-orderflow-matching-system-Bid-ask-" target="_blank">↗</a></div>
+            <div class="proj-head"><div class="proj-name">L3 Order Book Matching System</div><a class="proj-gh" href="https://github.com/anandQuant/Level-3-orderflow-matching-system-Bid-ask-" target="_blank">↗</a></div>
             <div class="proj-desc">Real-time L3 bid/ask matching engine — tracks order additions, cancellations &amp; executions with spoof detection.</div>
             <div class="proj-tags"><span class="proj-tag">Order Book</span><span class="proj-tag">Bid/Ask</span><span class="proj-tag">Market Data</span></div>
             <div class="proj-meta"><span class="lang-badge">C++17</span></div>
           </div>
           <div class="proj-card lang-cpp" data-lang="cpp">
-            <div class="proj-head"><div class="proj-name">HFT Infrastructure</div><a class="proj-gh" href="https://github.com/anand-fx/HFT" target="_blank">↗</a></div>
+            <div class="proj-head"><div class="proj-name">HFT Infrastructure</div><a class="proj-gh" href="https://github.com/anandQuant/HFT" target="_blank">↗</a></div>
             <div class="proj-desc">Low-latency order execution, tick-level processing &amp; latency benchmarking for microsecond-speed environments.</div>
             <div class="proj-tags"><span class="proj-tag">Low Latency</span><span class="proj-tag">Execution</span><span class="proj-tag">HFT</span></div>
             <div class="proj-meta"><span class="lang-badge">C++</span></div>
           </div>
           <div class="proj-card lang-py" data-lang="py">
-            <div class="proj-head"><div class="proj-name">Shannon's Demon · Geometric Rebalancing</div><a class="proj-gh" href="https://github.com/anand-fx/The-Geometric-Rebalancing-Premium-Exploiting-Shannon-s-Demon-in-Fx-Markets" target="_blank">↗</a></div>
+            <div class="proj-head"><div class="proj-name">Shannon's Demon · Geometric Rebalancing</div><a class="proj-gh" href="https://github.com/anandQuant/The-Geometric-Rebalancing-Premium-Exploiting-Shannon-s-Demon-in-Fx-Markets" target="_blank">↗</a></div>
             <div class="proj-desc">Exploits variance drain &amp; geometric rebalancing premium in FX — edge from volatility without directional prediction.</div>
             <div class="proj-tags"><span class="proj-tag">Quant Research</span><span class="proj-tag">FX</span><span class="proj-tag">Portfolio Math</span></div>
             <div class="proj-meta"><span class="lang-badge">Python</span></div>
           </div>
           <div class="proj-card lang-py" data-lang="py">
-            <div class="proj-head"><div class="proj-name">HMM + Supertrend Hypothesis</div><a class="proj-gh" href="https://github.com/anand-fx/Hypothesis-HMM-with-supertrend" target="_blank">↗</a></div>
+            <div class="proj-head"><div class="proj-name">HMM + Supertrend Hypothesis</div><a class="proj-gh" href="https://github.com/anandQuant/Hypothesis-HMM-with-supertrend" target="_blank">↗</a></div>
             <div class="proj-desc">Hidden Markov Model on Supertrend — XAUUSD regime detection research testing statistical edge of trend-state classification.</div>
             <div class="proj-tags"><span class="proj-tag">HMM</span><span class="proj-tag">ML</span><span class="proj-tag">XAUUSD</span></div>
             <div class="proj-meta"><span class="lang-badge">Python</span></div>
           </div>
           <div class="proj-card lang-py" data-lang="py">
-            <div class="proj-head"><div class="proj-name">ATM IV Analysis — Derivatives</div><a class="proj-gh" href="https://github.com/anand-fx/Asset-s-derivatives-ATM-IV-analysis.." target="_blank">↗</a></div>
+            <div class="proj-head"><div class="proj-name">ATM IV Analysis — Derivatives</div><a class="proj-gh" href="https://github.com/anandQuant/Asset-s-derivatives-ATM-IV-analysis.." target="_blank">↗</a></div>
             <div class="proj-desc">Tracks historical ATM IV for CE, PE &amp; combined — visualises IV expansion/compression &amp; mean-reversion signals.</div>
             <div class="proj-tags"><span class="proj-tag">Options</span><span class="proj-tag">Implied Vol</span><span class="proj-tag">Mean Reversion</span></div>
             <div class="proj-meta"><span class="lang-badge">Python</span></div>
           </div>
           <div class="proj-card lang-py" data-lang="py">
-            <div class="proj-head"><div class="proj-name">IV Analysis — Central Limit Theorem</div><a class="proj-gh" href="https://github.com/anand-fx/IV-analysis-Using-CENTRAL-LIMIT-THEORM" target="_blank">↗</a></div>
+            <div class="proj-head"><div class="proj-name">IV Analysis — Central Limit Theorem</div><a class="proj-gh" href="https://github.com/anandQuant/IV-analysis-Using-CENTRAL-LIMIT-THEORM" target="_blank">↗</a></div>
             <div class="proj-desc">IV study using CLT — models IV sample distributions to derive probabilistic bounds &amp; expected value ranges.</div>
             <div class="proj-tags"><span class="proj-tag">Statistics</span><span class="proj-tag">CLT</span><span class="proj-tag">Options</span></div>
             <div class="proj-meta"><span class="lang-badge">Python</span></div>
           </div>
           <div class="proj-card lang-py" data-lang="py">
-            <div class="proj-head"><div class="proj-name">TradingAgents — LLM Multi-Agent</div><a class="proj-gh" href="https://github.com/anand-fx/TradingAgents" target="_blank">↗</a></div>
+            <div class="proj-head"><div class="proj-name">TradingAgents — LLM Multi-Agent</div><a class="proj-gh" href="https://github.com/anandQuant/TradingAgents" target="_blank">↗</a></div>
             <div class="proj-desc">Multi-agent LLM framework — autonomous agents for research, risk &amp; execution layers. Extended for quant research.</div>
             <div class="proj-tags"><span class="proj-tag">LLM</span><span class="proj-tag">Multi-Agent</span><span class="proj-tag">AI Trading</span></div>
             <div class="proj-meta"><span class="lang-badge">Python</span></div>
           </div>
           <div class="proj-card lang-py" data-lang="py">
-            <div class="proj-head"><div class="proj-name">Economic Data Manager</div><a class="proj-gh" href="https://github.com/anand-fx/DATA-MANAGER-ECONOMIC-DATA" target="_blank">↗</a></div>
+            <div class="proj-head"><div class="proj-name">Economic Data Manager</div><a class="proj-gh" href="https://github.com/anandQuant/DATA-MANAGER-ECONOMIC-DATA" target="_blank">↗</a></div>
             <div class="proj-desc">Cleans &amp; separates economic release data from raw feeds — structures macro data for backtesting &amp; event-driven research.</div>
             <div class="proj-tags"><span class="proj-tag">Data Eng</span><span class="proj-tag">Macro</span><span class="proj-tag">ETL</span></div>
             <div class="proj-meta"><span class="lang-badge">Python</span></div>
           </div>
           <div class="proj-card lang-mql" data-lang="mql">
-            <div class="proj-head"><div class="proj-name">Order Blocks Detection (Live)</div><a class="proj-gh" href="https://github.com/anand-fx/Orderblocks-detection-in-live-markets." target="_blank">↗</a></div>
+            <div class="proj-head"><div class="proj-name">Order Blocks Detection (Live)</div><a class="proj-gh" href="https://github.com/anandQuant/Orderblocks-detection-in-live-markets." target="_blank">↗</a></div>
             <div class="proj-desc">Automated ICT Order Block detection on live feeds — identifies institutional footprints for discretionary confluence.</div>
             <div class="proj-tags"><span class="proj-tag">ICT/SMC</span><span class="proj-tag">Order Blocks</span><span class="proj-tag">Live</span></div>
             <div class="proj-meta"><span class="lang-badge">MQL5</span></div>
           </div>
           <div class="proj-card lang-mql" data-lang="mql">
-            <div class="proj-head"><div class="proj-name">Volume Session Profile (MT5)</div><a class="proj-gh" href="https://github.com/anand-fx/Volume-session-profile-For-MT5" target="_blank">↗</a></div>
+            <div class="proj-head"><div class="proj-name">Volume Session Profile (MT5)</div><a class="proj-gh" href="https://github.com/anandQuant/Volume-session-profile-For-MT5" target="_blank">↗</a></div>
             <div class="proj-desc">Session-based volume profile for MT5 — maps tick volume per price level, identifying high-volume nodes &amp; value areas.</div>
             <div class="proj-tags"><span class="proj-tag">Volume Profile</span><span class="proj-tag">MT5</span><span class="proj-tag">Indicator</span></div>
             <div class="proj-meta"><span class="lang-badge">MQL5</span></div>
@@ -614,7 +630,7 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
           <div class="contact-links">
             <a href="mailto:pandyaanand21@gmail.com" class="c-pill"><span class="c-ico">✉</span> Email</a>
             <a href="https://www.linkedin.com/in/pandya-anand-8b877a244/" target="_blank" class="c-pill"><span class="c-ico">in</span> LinkedIn</a>
-            <a href="https://github.com/anand-fx" target="_blank" class="c-pill"><span class="c-ico">⌥</span> GitHub</a>
+            <a href="https://github.com/anandQuant" target="_blank" class="c-pill"><span class="c-ico">⌥</span> GitHub</a>
           </div>
         </div>
       </div>
@@ -674,18 +690,12 @@ footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.05);pa
   },totalTime);
 })();
 
-/* ACCORDION — curtain wipe stagger */
+/* ACCORDION */
 function staggerReveal(item){
-  /* top-level acc-inner children */
   const topKids=[...item.querySelectorAll('.acc-inner>*')];
-  topKids.forEach((el,i)=>{
-    el.style.transitionDelay=`${i*55}ms`;
-  });
-  /* card-level children inside grids */
+  topKids.forEach((el,i)=>{el.style.transitionDelay=`${i*55}ms`;});
   const cards=[...item.querySelectorAll('.exp-card,.proj-card,.sk-cat,.edu-card,.cert-card,.hl-card')];
-  cards.forEach((el,i)=>{
-    el.style.transitionDelay=`${60+i*38}ms`;
-  });
+  cards.forEach((el,i)=>{el.style.transitionDelay=`${60+i*38}ms`;});
 }
 function resetReveal(item){
   item.querySelectorAll('.acc-inner>*,.exp-card,.proj-card,.sk-cat,.edu-card,.cert-card,.hl-card')

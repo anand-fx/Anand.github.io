@@ -1,6 +1,3 @@
-bash
-
-cat > /home/claude/portfolio.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,8 +66,9 @@ nav {
 /* ── HERO ── */
 #hero {
   min-height:100vh;
-  display:grid;
-  grid-template-rows:1fr auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
   padding-top:72px;
   position:relative;
   overflow:hidden;
@@ -84,161 +82,211 @@ nav {
   opacity:.4; pointer-events:none; z-index:1;
 }
 
-.hero-main {
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:4rem 3.5rem 2rem;
-  position:relative;
-  z-index:2;
+/* Subtle radial glow behind name */
+#hero::before {
+  content:'';
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:80vw; height:60vh;
+  background: radial-gradient(ellipse at center, rgba(201,185,154,.04) 0%, transparent 70%);
+  pointer-events:none; z-index:1;
 }
 
-/* Issue line — editorial dateline */
+.hero-inner {
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:4rem 3.5rem;
+  flex:1;
+  gap:0;
+}
+
+/* Dateline */
 .hero-dateline {
-  display:flex; align-items:center; gap:1.5rem;
-  margin-bottom:3.5rem;
+  display:flex; align-items:center; gap:1.2rem;
+  margin-bottom:3rem;
   opacity:0; animation:fadeUp .5s ease .1s forwards;
 }
-.hero-dateline-rule { flex:1; height:1px; background:var(--rule); max-width:48px; }
+.hero-dateline-rule { width:32px; height:1px; background:var(--rule); }
 .hero-dateline-text { font-size:9.5px; letter-spacing:.3em; color:var(--ink3); text-transform:uppercase; }
 .hero-dateline-dot { width:3px; height:3px; border-radius:50%; background:var(--ink3); }
 
-/* Giant editorial headline — the hero */
-.hero-headline {
+/* Name — the big editorial display */
+.hero-name {
   font-family:var(--serif);
   font-weight:700;
-  font-size:clamp(5.5rem,13vw,14rem);
+  font-size:clamp(5rem,13vw,13rem);
   line-height:.88;
-  letter-spacing:-.02em;
+  letter-spacing:-.025em;
   color:var(--ink);
-  margin-bottom:2.5rem;
   opacity:0;
-  animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .25s forwards;
-  position:relative;
+  animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .2s forwards;
 }
-.hero-headline .line-italic {
+.hero-name .name-italic {
   display:block;
   font-style:italic;
   font-weight:400;
   color:var(--accent);
-  font-size:.82em;
+  font-size:.78em;
   letter-spacing:.01em;
-  padding-left:.08em;
-}
-.hero-headline .line-outline {
-  display:block;
-  -webkit-text-stroke:1px rgba(240,236,228,.2);
-  color:transparent;
-  font-weight:700;
 }
 
-/* Subtext row */
-.hero-sub-row {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:3rem;
-  padding-top:2.5rem;
-  border-top:1px solid var(--rule);
+/* Thin rule between name and title */
+.hero-divider {
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  margin:2rem 0 1.8rem;
+  width:min(600px,90%);
+  opacity:0;
+  animation:fadeUp .5s ease .55s forwards;
+}
+.hero-divider-line { flex:1; height:1px; background:var(--rule); }
+.hero-divider-diamond {
+  width:6px; height:6px;
+  border:1px solid var(--accent);
+  transform:rotate(45deg);
+  flex-shrink:0;
+}
+
+/* Title under name */
+.hero-title {
+  font-family:var(--mono);
+  font-size:clamp(.75rem,1.4vw,1rem);
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:var(--ink2);
   opacity:0;
   animation:fadeUp .6s ease .65s forwards;
-}
-.hero-sub-left { display:flex; flex-direction:column; gap:1rem; }
-.hero-sub-label { font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--ink3); }
-.hero-sub-desc { font-size:13px; color:var(--ink2); line-height:1.75; max-width:380px; }
-.hero-sub-right {
   display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  justify-content:space-between;
-}
-.hero-market-row {
-  display:flex;
-  gap:2rem;
-  align-items:flex-start;
+  align-items:center;
+  gap:1.2rem;
   flex-wrap:wrap;
-  justify-content:flex-end;
+  justify-content:center;
 }
-.hero-market-item { text-align:right; }
-.hero-market-label { font-size:9px; letter-spacing:.2em; color:var(--ink3); text-transform:uppercase; margin-bottom:.2rem; }
-.hero-market-val { font-family:var(--mono); font-size:15px; color:var(--ink); font-weight:500; }
-.hero-market-chg { font-size:10px; margin-top:.1rem; }
-.hero-market-chg.pos { color:#6fcf97; }
-.hero-market-chg.neg { color:var(--red); }
+.hero-title-sep { color:var(--accent); font-size:.65em; }
 
 /* Typewriter instruments */
-.hero-instrument { font-family:var(--mono); font-size:12px; color:var(--ink2); }
-.hero-cursor-blink { display:inline-block; width:1px; height:11px; background:var(--accent); margin-left:1px; vertical-align:middle; animation:blink .75s step-end infinite; }
+.hero-instrument-wrap {
+  margin-top:.8rem;
+  font-size:11px;
+  color:var(--ink3);
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  opacity:0;
+  animation:fadeUp .5s ease .75s forwards;
+}
+.hero-instrument-label { color:var(--ink3); margin-right:.6rem; }
+.hero-instrument-val { color:var(--ink2); font-weight:500; }
+.hero-cursor-blink { display:inline-block; width:1px; height:10px; background:var(--accent); margin-left:1px; vertical-align:middle; animation:blink .75s step-end infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-/* Slogan strip */
-.hero-slogan-strip {
-  border-top:1px solid var(--rule);
-  padding:1.4rem 3.5rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:2rem;
-  position:relative;
-  z-index:2;
+/* Motto / quote */
+.hero-motto-wrap {
+  margin-top:3.5rem;
+  max-width:640px;
   opacity:0;
-  animation:fadeUp .5s ease 1s forwards;
-  overflow:hidden;
+  animation:fadeUp .6s ease .9s forwards;
+  position:relative;
 }
-.hero-slogan-text {
+.hero-motto-quote-mark {
+  font-family:var(--serif);
+  font-size:5rem;
+  line-height:.6;
+  color:rgba(201,185,154,.12);
+  position:absolute;
+  top:-1rem;
+  left:-1rem;
+  pointer-events:none;
+  font-style:italic;
+}
+.hero-motto-text {
   font-family:var(--serif);
   font-style:italic;
-  font-size:clamp(.85rem,1.5vw,1.1rem);
+  font-size:clamp(1rem,1.8vw,1.3rem);
   color:var(--ink3);
-  letter-spacing:.03em;
-  line-height:1.5;
-  flex:1;
-}
-.hero-slogan-text strong {
-  color:var(--ink2);
-  font-style:normal;
-  font-weight:400;
-}
-.hero-slogan-attr { font-size:9px; letter-spacing:.2em; color:var(--ink3); text-transform:uppercase; white-space:nowrap; }
-
-/* Ticker marquee */
-.ticker-wrap {
+  line-height:1.65;
+  letter-spacing:.02em;
   position:relative;
-  z-index:2;
-  border-top:1px solid var(--rule);
-  background:var(--bg2);
-  overflow:hidden;
-  height:32px;
-  display:flex;
-  align-items:center;
+  z-index:1;
+}
+.hero-motto-text .word {
+  display:inline;
   opacity:0;
-  animation:fadeUp .4s ease 1.1s forwards;
+  transition:opacity .45s ease, color .45s ease;
 }
-.ticker-track {
-  display:flex;
-  gap:0;
-  white-space:nowrap;
-  animation:ticker 30s linear infinite;
-  will-change:transform;
-}
-@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-.ticker-item {
-  display:inline-flex;
-  align-items:center;
-  gap:.6rem;
-  padding:0 2rem;
-  font-size:10px;
-  letter-spacing:.12em;
+.hero-motto-text .word.vis { opacity:1; }
+.hero-motto-text .word.key { color:var(--accent); font-style:italic; }
+.hero-motto-attr {
+  font-size:9.5px;
+  letter-spacing:.25em;
   color:var(--ink3);
-  border-right:1px solid var(--rule);
+  text-transform:uppercase;
+  margin-top:1rem;
+  opacity:0;
+  transition:opacity .6s ease 2s;
 }
-.ticker-item .t-sym { color:var(--ink2); font-weight:500; }
-.ticker-item .t-pos { color:#6fcf97; }
-.ticker-item .t-neg { color:var(--red); }
+.hero-motto-attr.vis { opacity:1; }
+
+/* CTA row */
+.hero-cta-row {
+  display:flex;
+  gap:1.5rem;
+  margin-top:3rem;
+  flex-wrap:wrap;
+  justify-content:center;
+  opacity:0;
+  animation:fadeUp .5s ease 1.1s forwards;
+}
+.hero-cta-row a {
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  text-decoration:none;
+  padding:.6rem 1.5rem;
+  border:1px solid rgba(240,236,228,.1);
+  color:var(--ink3);
+  transition:all .25s;
+}
+.hero-cta-row a:first-child {
+  border-color:var(--accent);
+  color:var(--accent);
+  background:rgba(201,185,154,.05);
+}
+.hero-cta-row a:hover { border-color:var(--accent); color:var(--accent); }
+
+/* Market chips row */
+.hero-chips {
+  display:flex;
+  gap:1rem;
+  margin-top:2.5rem;
+  flex-wrap:wrap;
+  justify-content:center;
+  opacity:0;
+  animation:fadeUp .5s ease 1.2s forwards;
+}
+.hero-chip {
+  font-size:9px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ink3);
+  border:1px solid var(--rule);
+  padding:.3rem .8rem;
+}
+.hero-chip .chip-val { color:var(--ink2); margin-left:.4rem; }
+.hero-chip .chip-pos { color:#6fcf97; margin-left:.2rem; }
+.hero-chip .chip-neg { color:var(--red); margin-left:.2rem; }
 
 /* ── STATS BAND ── */
 .stats-band {
   display:grid;
   grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--rule);
   border-bottom:1px solid var(--rule);
 }
 .stat-cell {
@@ -246,6 +294,7 @@ nav {
   border-right:1px solid var(--rule);
   position:relative;
   overflow:hidden;
+  text-align:center;
 }
 .stat-cell:last-child { border-right:none; }
 .stat-cell::before {
@@ -303,7 +352,6 @@ nav {
 .acc-item.open .acc-body { grid-template-rows:1fr; }
 .acc-content { padding:0 3.5rem 3rem; }
 
-/* cards hidden → revealed */
 .acc-content .reveal { opacity:0; transform:translateY(10px); transition:opacity .4s ease, transform .4s ease; }
 .acc-item.open .acc-content .reveal { opacity:1; transform:none; }
 
@@ -329,15 +377,8 @@ nav {
   padding:.3rem .7rem; border:1px solid rgba(201,185,154,.2);
   color:var(--accent); white-space:nowrap; align-self:start;
 }
-
-/* Highlights */
 .exp-highlights { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--rule); margin-top:2rem; }
-.hl-cell {
-  background:var(--bg);
-  padding:1.4rem 1.8rem;
-  display:flex; gap:1rem; align-items:flex-start;
-  transition:background .2s;
-}
+.hl-cell { background:var(--bg); padding:1.4rem 1.8rem; display:flex; gap:1rem; align-items:flex-start; transition:background .2s; }
 .hl-cell:hover { background:var(--bg2); }
 .hl-ico { font-size:1rem; flex-shrink:0; }
 .hl-cell-title { font-family:var(--serif); font-size:.95rem; color:var(--ink); margin-bottom:.2rem; }
@@ -345,34 +386,12 @@ nav {
 
 /* ── PROJECTS ── */
 .proj-filters { display:flex; gap:.5rem; margin-bottom:2rem; flex-wrap:wrap; }
-.pf {
-  font-size:9.5px; letter-spacing:.2em; text-transform:uppercase;
-  padding:.3rem 1rem; border:1px solid rgba(240,236,228,.08);
-  color:var(--ink3); cursor:none; transition:all .2s;
-}
+.pf { font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; padding:.3rem 1rem; border:1px solid rgba(240,236,228,.08); color:var(--ink3); cursor:none; transition:all .2s; }
 .pf:hover, .pf.active { border-color:var(--accent); color:var(--accent); background:rgba(201,185,154,.05); }
-
-.proj-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:1px;
-  background:var(--rule);
-}
-.proj-card {
-  background:var(--bg);
-  padding:1.6rem 1.8rem;
-  display:flex; flex-direction:column; gap:.8rem;
-  transition:background .25s;
-  position:relative; overflow:hidden;
-}
+.proj-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1px; background:var(--rule); }
+.proj-card { background:var(--bg); padding:1.6rem 1.8rem; display:flex; flex-direction:column; gap:.8rem; transition:background .25s; position:relative; overflow:hidden; }
 .proj-card:hover { background:var(--bg2); }
-.proj-card::before {
-  content:'';
-  position:absolute; top:0; left:0; right:0; height:1px;
-  background:var(--accent);
-  transform:scaleX(0); transform-origin:left;
-  transition:transform .4s ease;
-}
+.proj-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .4s ease; }
 .proj-card:hover::before { transform:scaleX(1); }
 .proj-lang-line { display:flex; align-items:center; justify-content:space-between; margin-bottom:.2rem; }
 .proj-lang { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); }
@@ -385,17 +404,9 @@ nav {
 
 /* ── SKILLS ── */
 .skills-editorial { display:grid; grid-template-columns:repeat(3,1fr); gap:3rem; }
-.sk-block-label {
-  font-size:9px; letter-spacing:.28em; text-transform:uppercase;
-  color:var(--ink3); margin-bottom:1.5rem;
-  padding-bottom:.6rem; border-bottom:1px solid var(--rule);
-}
+.sk-block-label { font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:var(--ink3); margin-bottom:1.5rem; padding-bottom:.6rem; border-bottom:1px solid var(--rule); }
 .sk-tags { display:flex; flex-wrap:wrap; gap:.4rem; }
-.sk-tag {
-  font-size:11px; padding:.3rem .7rem;
-  border:1px solid rgba(240,236,228,.07);
-  color:var(--ink2); transition:all .2s; cursor:default;
-}
+.sk-tag { font-size:11px; padding:.3rem .7rem; border:1px solid rgba(240,236,228,.07); color:var(--ink2); transition:all .2s; cursor:default; }
 .sk-tag:hover { border-color:var(--accent); color:var(--accent); }
 
 /* ── EDUCATION ── */
@@ -414,42 +425,19 @@ nav {
 
 /* ── CONTACT ── */
 .contact-editorial { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
-.contact-big-email {
-  font-family:var(--serif);
-  font-size:clamp(1.4rem,2.5vw,2rem);
-  color:var(--ink);
-  text-decoration:none;
-  display:block;
-  margin-bottom:2rem;
-  transition:color .2s;
-  position:relative;
-}
-.contact-big-email::after {
-  content:'';
-  position:absolute; bottom:-4px; left:0; width:100%; height:1px;
-  background:var(--accent); transform:scaleX(0); transition:transform .3s;
-}
+.contact-big-email { font-family:var(--serif); font-size:clamp(1.4rem,2.5vw,2rem); color:var(--ink); text-decoration:none; display:block; margin-bottom:2rem; transition:color .2s; position:relative; }
+.contact-big-email::after { content:''; position:absolute; bottom:-4px; left:0; width:100%; height:1px; background:var(--accent); transform:scaleX(0); transition:transform .3s; }
 .contact-big-email:hover { color:var(--accent); }
 .contact-big-email:hover::after { transform:scaleX(1); }
 .contact-pills { display:flex; flex-direction:column; gap:.6rem; }
-.c-pill {
-  display:flex; align-items:center; gap:.9rem;
-  padding:.7rem 1.2rem; border:1px solid rgba(240,236,228,.08);
-  color:var(--ink2); text-decoration:none; font-size:11.5px;
-  transition:all .2s; width:fit-content;
-}
+.c-pill { display:flex; align-items:center; gap:.9rem; padding:.7rem 1.2rem; border:1px solid rgba(240,236,228,.08); color:var(--ink2); text-decoration:none; font-size:11.5px; transition:all .2s; width:fit-content; }
 .c-pill:hover { border-color:var(--accent); color:var(--accent); background:rgba(201,185,154,.04); }
 .c-ico { color:var(--accent); }
 .contact-right-text { font-size:12.5px; color:var(--ink3); line-height:1.9; }
 .contact-right-text strong { color:var(--ink2); font-weight:400; }
 
 /* ── FOOTER ── */
-footer {
-  border-top:1px solid var(--rule);
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1.4rem 3.5rem;
-  font-size:10px; letter-spacing:.12em; color:var(--ink3);
-}
+footer { border-top:1px solid var(--rule); display:flex; justify-content:space-between; align-items:center; padding:1.4rem 3.5rem; font-size:10px; letter-spacing:.12em; color:var(--ink3); }
 
 @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
 
@@ -460,12 +448,8 @@ footer {
   .nav-links.open { display:flex; }
   .nav-links a { font-size:14px; }
   .nav-burger { display:flex; }
-  .hero-main { padding:3rem 1.5rem 1.5rem; }
-  .hero-headline { font-size:clamp(4rem,16vw,8rem); }
-  .hero-sub-row { grid-template-columns:1fr; gap:2rem; }
-  .hero-sub-right { align-items:flex-start; }
-  .hero-market-row { justify-content:flex-start; }
-  .hero-slogan-strip { padding:1.2rem 1.5rem; flex-direction:column; align-items:flex-start; gap:.8rem; }
+  .hero-inner { padding:3rem 1.5rem; text-align:center; }
+  .hero-name { font-size:clamp(4rem,16vw,8rem); }
   .stats-band { grid-template-columns:1fr 1fr; }
   .stat-cell:nth-child(2) { border-right:none; }
   .stat-cell:nth-child(3) { border-top:1px solid var(--rule); }
@@ -480,7 +464,7 @@ footer {
   footer { padding:1.2rem 1.5rem; flex-direction:column; gap:.5rem; text-align:center; }
 }
 @media(max-width:480px) {
-  .hero-headline { font-size:clamp(3rem,18vw,5.5rem); }
+  .hero-name { font-size:clamp(3rem,18vw,5.5rem); }
   .stats-band { grid-template-columns:1fr 1fr; }
   .skills-editorial { grid-template-columns:1fr; }
   body { cursor:auto; }
@@ -522,69 +506,68 @@ footer {
 
 <!-- ══════════════ HERO ══════════════ -->
 <section id="hero">
-  <div class="hero-main">
+  <div class="hero-inner">
 
+    <!-- Dateline -->
     <div class="hero-dateline">
       <div class="hero-dateline-rule"></div>
       <span class="hero-dateline-text">Dubai · India</span>
       <div class="hero-dateline-dot"></div>
-      <span class="hero-dateline-text">Prop Trading · Quant Research</span>
-      <div class="hero-dateline-dot"></div>
       <span class="hero-dateline-text">4+ Years</span>
-      <div class="hero-dateline-rule" style="flex:none;width:48px;background:var(--rule)"></div>
+      <div class="hero-dateline-rule"></div>
     </div>
 
-    <h1 class="hero-headline">
-      QUANT<span class="line-italic">Trader &amp;</span><span class="line-outline">Developer.</span>
+    <!-- Big name -->
+    <h1 class="hero-name">
+      ANAND<span class="name-italic">Pandya.</span>
     </h1>
 
-    <div class="hero-sub-row">
-      <div class="hero-sub-left">
-        <div class="hero-sub-label">About</div>
-        <p class="hero-sub-desc">Building algorithmic trading systems and quantitative strategies across global markets — FX, Crypto, Futures &amp; Derivatives. Bridging rigorous financial theory with production-grade code.</p>
-        <div style="display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap;">
-          <a href="#" onclick="openAcc('projects');return false;" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:2px;transition:color .2s;">View Projects ↗</a>
-          <a href="#" onclick="openAcc('contact');return false;" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:2px;transition:color .2s;">Let's Collaborate ↗</a>
-        </div>
-      </div>
-      <div class="hero-sub-right">
-        <div class="hero-market-row">
-          <div class="hero-market-item">
-            <div class="hero-market-label">Currently Trading</div>
-            <div class="hero-instrument"><span id="tw-inst">Forex</span><span class="hero-cursor-blink"></span></div>
-          </div>
-          <div class="hero-market-item">
-            <div class="hero-market-label">Tournament PnL</div>
-            <div class="hero-market-val">+19.5%</div>
-            <div class="hero-market-chg pos">▲ Aug 2024 · Winner</div>
-          </div>
-          <div class="hero-market-item">
-            <div class="hero-market-label">Projects</div>
-            <div class="hero-market-val">11+</div>
-            <div class="hero-market-chg pos">across 3 stacks</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:1rem;margin-top:2rem;">
-          <a href="https://github.com/anandQuant" target="_blank" style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);text-decoration:none;transition:color .2s;border-bottom:1px solid var(--rule);padding-bottom:2px;">GitHub ↗</a>
-          <a href="https://www.linkedin.com/in/pandyaanand999/" target="_blank" style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:2px;">LinkedIn ↗</a>
-          <a href="mailto:pandyaanand21@gmail.com" style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:2px;">Email ↗</a>
-        </div>
-      </div>
+    <!-- Diamond divider -->
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <div class="hero-divider-diamond"></div>
+      <div class="hero-divider-line"></div>
+    </div>
+
+    <!-- Title row -->
+    <div class="hero-title">
+      <span>Quantitative Trader</span>
+      <span class="hero-title-sep">◈</span>
+      <span>Strategy Developer</span>
+      <span class="hero-title-sep">◈</span>
+      <span>Algo Systems</span>
+    </div>
+
+    <!-- Typewriter: currently trading -->
+    <div class="hero-instrument-wrap">
+      <span class="hero-instrument-label">Currently trading</span>
+      <span class="hero-instrument-val" id="tw-inst">Forex</span><span class="hero-cursor-blink"></span>
+    </div>
+
+    <!-- Animated motto / quote -->
+    <div class="hero-motto-wrap">
+      <div class="hero-motto-quote-mark">"</div>
+      <div class="hero-motto-text" id="motto-el"></div>
+      <div class="hero-motto-attr" id="motto-attr">— Albert Einstein</div>
+    </div>
+
+    <!-- Market chips -->
+    <div class="hero-chips">
+      <div class="hero-chip">XAUUSD <span class="chip-val">2318.40</span><span class="chip-pos">▲ +0.34%</span></div>
+      <div class="hero-chip">BTCUSD <span class="chip-val">61,240</span><span class="chip-pos">▲ +1.20%</span></div>
+      <div class="hero-chip">Tournament PnL <span class="chip-val">+19.5%</span><span class="chip-pos">Winner</span></div>
+      <div class="hero-chip">EURUSD <span class="chip-val">1.0842</span><span class="chip-neg">▼ -0.12%</span></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="hero-cta-row">
+      <a href="#" onclick="openAcc('projects');return false;">View Projects ↗</a>
+      <a href="#" onclick="openAcc('contact');return false;">Let's Collaborate ↗</a>
+      <a href="https://github.com/anandQuant" target="_blank">GitHub ↗</a>
     </div>
 
   </div>
-
-  <!-- Slogan strip -->
-  <div class="hero-slogan-strip">
-    <div class="hero-slogan-text" id="slogan-el" style="opacity:0"></div>
-    <div class="hero-slogan-attr">— Albert Einstein</div>
-  </div>
 </section>
-
-<!-- Ticker -->
-<div class="ticker-wrap">
-  <div class="ticker-track" id="ticker"></div>
-</div>
 
 <!-- Stats band -->
 <div class="stats-band">
@@ -836,51 +819,33 @@ document.addEventListener('mousemove', e => {
       setTimeout(()=>{
         loader.classList.add('out');
         document.body.style.overflow = '';
-        setTimeout(()=>{ loader.style.display='none'; buildSlogan(); runCounters(); }, 900);
+        setTimeout(()=>{ loader.style.display='none'; buildMotto(); runCounters(); }, 900);
       }, 500);
     }
   }
   setTimeout(step, 800);
 })();
 
-/* ── SLOGAN ── */
-function buildSlogan(){
-  const el = document.getElementById('slogan-el');
-  const full = '"I have no special talent, I am only passionately curious."';
-  el.style.opacity='1';
-  el.innerHTML='';
+/* ── MOTTO WORD-BY-WORD ANIMATION ── */
+function buildMotto(){
+  const el = document.getElementById('motto-el');
+  const attrEl = document.getElementById('motto-attr');
+  const full = 'I have no special talent. I am only passionately curious.';
+  const keyWords = ['passionately','curious','special','talent'];
+  el.innerHTML = '';
   const words = full.split(' ');
-  words.forEach((w,i) => {
+  words.forEach((w, i) => {
     const span = document.createElement('span');
+    span.className = 'word' + (keyWords.some(k => w.toLowerCase().replace(/[^a-z]/g,'').includes(k)) ? ' key' : '');
     span.textContent = w + ' ';
-    span.style.cssText = `opacity:0;display:inline;transition:opacity .4s ease ${i*0.055}s, color .4s ease ${i*0.055}s`;
-    const isKey = ['passionately','curious','special','talent'].some(k => w.toLowerCase().includes(k));
-    span.style.color = isKey ? 'var(--accent)' : 'var(--ink3)';
+    span.style.transitionDelay = `${i * 80}ms`;
     el.appendChild(span);
-    requestAnimationFrame(()=> requestAnimationFrame(()=>{ span.style.opacity='1'; }));
+    // stagger visibility
+    setTimeout(() => span.classList.add('vis'), 200 + i * 80);
   });
+  // show attribution after all words
+  setTimeout(() => attrEl.classList.add('vis'), 200 + words.length * 80 + 300);
 }
-
-/* ── TICKER ── */
-(function(){
-  const items = [
-    {sym:'XAUUSD',val:'2318.40',chg:'+0.34%',pos:true},
-    {sym:'EURUSD',val:'1.0842',chg:'-0.12%',pos:false},
-    {sym:'BTCUSD',val:'61,240',chg:'+1.20%',pos:true},
-    {sym:'NIFTY 50',val:'22,415',chg:'+0.55%',pos:true},
-    {sym:'GBPUSD',val:'1.2651',chg:'-0.08%',pos:false},
-    {sym:'ETHUSD',val:'3,182',chg:'+0.88%',pos:true},
-    {sym:'USDJPY',val:'154.32',chg:'+0.21%',pos:true},
-    {sym:'CRUDE OIL',val:'82.14',chg:'-0.44%',pos:false},
-    {sym:'BANKNIFTY',val:'47,820',chg:'+0.62%',pos:true},
-    {sym:'USDCHF',val:'0.9104',chg:'+0.07%',pos:true},
-  ];
-  const track = document.getElementById('ticker');
-  const render = items.map(it =>
-    `<div class="ticker-item"><span class="t-sym">${it.sym}</span><span>${it.val}</span><span class="${it.pos?'t-pos':'t-neg'}">${it.chg}</span></div>`
-  ).join('');
-  track.innerHTML = render + render; // double for seamless loop
-})();
 
 /* ── TYPEWRITER ── */
 const instruments = ['Forex','Crypto','Equities','Futures','Derivatives','Options','OTC Markets'];
@@ -965,9 +930,3 @@ navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
 </script>
 </body>
 </html>
-HTMLEOF
-echo "Lines: $(wc -l < /home/claude/portfolio.html)"
-Output
-
-Lines: 964
-Done

@@ -260,28 +260,6 @@ nav {
 }
 .hero-cta-row a:hover { border-color:var(--accent); color:var(--accent); }
 
-/* Market chips row */
-.hero-chips {
-  display:flex;
-  gap:1rem;
-  margin-top:2.5rem;
-  flex-wrap:wrap;
-  justify-content:center;
-  opacity:0;
-  animation:fadeUp .5s ease 1.2s forwards;
-}
-.hero-chip {
-  font-size:9px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--ink3);
-  border:1px solid var(--rule);
-  padding:.3rem .8rem;
-}
-.hero-chip .chip-val { color:var(--ink2); margin-left:.4rem; }
-.hero-chip .chip-pos { color:#6fcf97; margin-left:.2rem; }
-.hero-chip .chip-neg { color:var(--red); margin-left:.2rem; }
-
 /* ── STATS BAND ── */
 .stats-band {
   display:grid;
@@ -552,14 +530,6 @@ footer { border-top:1px solid var(--rule); display:flex; justify-content:space-b
       <div class="hero-motto-quote-mark">"</div>
       <div class="hero-motto-text" id="motto-el"></div>
       <div class="hero-motto-attr" id="motto-attr">— Albert Einstein</div>
-    </div>
-
-    <!-- Market chips -->
-    <div class="hero-chips">
-      <div class="hero-chip">XAUUSD <span class="chip-val">2318.40</span><span class="chip-pos">▲ +0.34%</span></div>
-      <div class="hero-chip">BTCUSD <span class="chip-val">61,240</span><span class="chip-pos">▲ +1.20%</span></div>
-      <div class="hero-chip">Tournament PnL <span class="chip-val">+19.5%</span><span class="chip-pos">Winner</span></div>
-      <div class="hero-chip">EURUSD <span class="chip-val">1.0842</span><span class="chip-neg">▼ -0.12%</span></div>
     </div>
 
     <!-- CTA -->

@@ -258,6 +258,12 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
 #tiltbtn i::after{content:'';position:absolute;left:50%;top:2px;width:1.5px;height:4px;background:var(--gold);transform:translateX(-50%)}
 @media(max-width:900px){
   .rail,#hud{display:none}
+  /* A backdrop-filter makes an element the containing block for its
+     fixed-position descendants, which was sizing the menu to the
+     header instead of the viewport. Drop the blur here and lean on
+     an opaque bar instead. */
+  header.solid{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(3,4,10,.94)}
+  nav ul{z-index:700}
   /* every control gets a finger-sized hit area */
   .btn{padding:1rem 1.6rem;font-size:13px}
   .filters button{padding:.7rem 1.15rem;font-size:12px}
@@ -641,7 +647,7 @@ var mobile  = window.innerWidth < 820 || coarse;
    fullscreen passes at full density. One table decides everything,
    and the frame-time watchdog below can step it down further. */
 var Q = mobile ? {
-  pr:1.15, stars:22000, field:2400, motes:45, rocks:40,
+  pr:1.6, stars:22000, field:2400, motes:45, rocks:40,
   cluster:[360,260], steps:60, blurs:2, greebles:1
 } : {
   pr:2, stars:110000, field:9000, motes:170, rocks:90,
@@ -1644,7 +1650,7 @@ function initBloom(){
   blurMat = new THREE.ShaderMaterial({uniforms:{tD:{value:null},
     uTexel:{value:new THREE.Vector2(2/w,2/h)}, uDir:{value:new THREE.Vector2(1,0)}, uRad:{value:1}},
     vertexShader:QUAD_VERT, fragmentShader:BLUR_FRAG, depthTest:false, depthWrite:false});
-  compMat = new THREE.ShaderMaterial({uniforms:{tS:{value:null},tB:{value:null},uAmt:{value:1.05}},
+  compMat = new THREE.ShaderMaterial({uniforms:{tS:{value:null},tB:{value:null},uAmt:{value:mobile?0.82:1.05}},
     vertexShader:QUAD_VERT, fragmentShader:COMP_FRAG, depthTest:false, depthWrite:false});
   copyMat = new THREE.ShaderMaterial({uniforms:{tD:{value:null}},
     vertexShader:QUAD_VERT, fragmentShader:COPY_FRAG, depthTest:false, depthWrite:false});
@@ -1737,7 +1743,7 @@ function initSpace(){
     col[i3]=c.r*b; col[i3+1]=c.g*b; col[i3+2]=c.b*b;
     siz[i]=sz; tilt[i]=ti; phase[i]=ph;
   }
-  galaxyObj = cloud(orb,col,siz,tilt,phase, 0.115, mobile?2.0:1.35);
+  galaxyObj = cloud(orb,col,siz,tilt,phase, 0.115, mobile?1.45:1.35);
   galaxyObj.rotation.x = 0.05;
   scene.add(galaxyObj);
 
@@ -1985,7 +1991,12 @@ function render(){
 
     if(uf && uf.uActive.value === 1){
       if(dt > 0.034){ slowFrames++; } else { slowFrames = Math.max(0, slowFrames-1); }
-      if(slowFrames > 90 && quality > 0.45){ quality = 0.45; slowFrames = 0; }
+      if(slowFrames > 90 && quality > 0.45){
+        quality = 0.45;
+        Q.pr = Math.min(Q.pr, 1.15);      /* sharpness is the first thing to go */
+        rtW = 0; onResize();
+        slowFrames = 0;
+      }
       else if(slowFrames > 150 && quality <= 0.45){
         /* still struggling — drop the geodesic trace and keep the
            page smooth. Everything else survives. */
@@ -2167,7 +2178,8 @@ function screenAngle(){
 }
 
 function onOrient(e){
-  if(e.beta === null || e.gamma === null) return;
+  if(e.beta === null || e.gamma === null ||
+     e.beta === undefined || e.gamma === undefined) return;
   var b = e.beta, g = e.gamma, x, y;
   switch(screenAngle()){
     case 90:  x =  b; y = -g; break;   /* landscape, rotated left  */
@@ -2189,14 +2201,36 @@ function onOrient(e){
   tiltSeen = true;
 }
 
+/* Android is inconsistent here. Some handsets only emit
+   deviceorientationabsolute, some emit deviceorientation with null
+   angles, and some have no gyroscope at all. So: listen for both,
+   and if nothing usable turns up shortly, derive the tilt from the
+   accelerometer instead — every phone has one of those. */
+function onMotion(e){
+  var g = e.accelerationIncludingGravity;
+  if(!g || g.x === null || g.y === null) return;
+  var ax = g.x, ay = g.y, az = g.z || 0;
+  var gamma = Math.atan2(-ax, Math.sqrt(ay*ay + az*az)) * 180/Math.PI;
+  var beta  = Math.atan2(-ay, Math.abs(az) < 0.001 ? 0.001 : Math.abs(az)) * 180/Math.PI;
+  onOrient({beta:beta, gamma:gamma});
+}
+
 function startTilt(){
   addEventListener('deviceorientation', onOrient, {passive:true});
+  addEventListener('deviceorientationabsolute', onOrient, {passive:true});
   addEventListener('orientationchange', function(){ tiltBase = null; });
+  setTimeout(function(){
+    if(!tiltSeen){
+      console.info('[tilt] no orientation data — falling back to the accelerometer');
+      addEventListener('devicemotion', onMotion, {passive:true});
+    }
+  }, 1400);
 }
 
 (function(){
   var pill = document.getElementById('tiltbtn');
-  if(!coarse || reduced || typeof DeviceOrientationEvent === 'undefined'){ return; }
+  var touch = coarse || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+  if(!touch || reduced || typeof DeviceOrientationEvent === 'undefined'){ return; }
 
   var needsAsk = typeof DeviceOrientationEvent.requestPermission === 'function';
   if(!needsAsk){

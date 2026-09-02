@@ -91,10 +91,10 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1);transform-origin:left}
 .panel.wide{width:min(680px,100%)}
 .gap{height:26vh}
 
-.head{margin-bottom:2.6rem}
-.head h2{font-family:var(--serif);font-size:clamp(2.1rem,4.4vw,3.4rem);font-weight:600;letter-spacing:-.022em;line-height:1.06}
-.head p{color:var(--ink2);margin-top:.9rem;font-weight:400;font-size:17px;line-height:1.66}
-.coord{font-family:var(--sans);font-size:11.5px;font-weight:600;color:var(--ink2);letter-spacing:.19em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.7rem}
+.head{margin-bottom:2.4rem}
+.head h2{font-family:var(--serif);font-size:clamp(2.4rem,5vw,3.9rem);font-weight:500;letter-spacing:-.028em;line-height:1.02}
+.head p{color:var(--ink2);margin-top:.75rem;font-weight:300;font-size:16.5px;line-height:1.6}
+.coord{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--gold);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.7rem}
 .coord::before{content:'';width:22px;height:1px;background:var(--gold);opacity:.75}
 .rv{opacity:0;transform:translateY(30px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
 .rv.in{opacity:1;transform:none}
@@ -119,10 +119,10 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1);transform-origin:left}
 .caret{display:inline-block;width:1px;height:11px;background:var(--gold);vertical-align:-2px;animation:blink .8s step-end infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 .hero-cta{display:flex;gap:.7rem;justify-content:center;margin-top:2.4rem;flex-wrap:wrap;opacity:0;animation:up .8s ease 1.2s forwards}
-.btn{font-family:var(--sans);display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;padding:.92rem 1.7rem;border-radius:2px;font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;border:1px solid var(--line);color:var(--ink2);background:rgba(3,4,10,.34);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:border-color .35s,color .35s,background .35s,transform .35s,box-shadow .35s}
-.btn:hover{border-color:rgba(232,200,138,.6);color:var(--ink);background:rgba(232,200,138,.1);transform:translateY(-2px);box-shadow:0 10px 34px -18px rgba(232,200,138,.8)}
-.btn.solid{background:var(--ink);color:#06070d;border-color:var(--ink)}
-.btn.solid:hover{background:var(--gold);border-color:var(--gold);color:#0a0a12}
+.btn{font-family:var(--sans);display:inline-flex;align-items:center;gap:.6rem;text-decoration:none;padding:.92rem 1.75rem;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink)}
+.btn:hover{color:#fff}
+.btn.solid{background:rgba(248,246,242,.93);color:#08090f;border-color:rgba(255,255,255,.65)}
+.btn.solid:hover{background:rgba(240,205,142,.95);border-color:rgba(255,236,190,.8);color:#0a0a12}
 
 /* scroll cue: parked clear of the buttons, and it gets out of the
    way the moment you actually start scrolling */
@@ -166,9 +166,9 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1);transform-origin:left}
 .win small{font-family:var(--sans);font-size:12.5px;color:var(--ink2);font-weight:400}
 
 .filters{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.4rem}
-.filters button{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;padding:.6rem 1.05rem;border-radius:2px;background:rgba(3,4,10,.4);border:1px solid var(--line);color:var(--ink2);cursor:pointer;transition:.28s}
-.filters button:hover{color:var(--ink2);border-color:rgba(210,205,195,.3)}
-.filters button.on{color:#06070d;background:var(--gold);border-color:var(--gold);box-shadow:0 0 22px -6px rgba(232,200,138,.7)}
+.filters button{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;padding:.6rem 1.1rem;border-radius:999px;color:var(--ink2);cursor:pointer}
+.filters button:hover{color:#fff}
+.filters button.on{color:#0a0a12;background:rgba(240,205,142,.94);border-color:rgba(255,238,196,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 8px 26px -12px rgba(232,200,138,.9)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
 .card{position:relative;overflow:hidden;text-decoration:none;background:rgba(8,11,24,.4);-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);border:1px solid var(--line2);border-radius:3px;padding:1.2rem 1.25rem;display:flex;flex-direction:column;gap:.5rem;transition:border-color .4s,background .4s,transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s}
 .card::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(160px 160px at var(--mx,50%) var(--my,50%),rgba(232,200,138,.12),transparent 70%)}
@@ -238,10 +238,57 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
 #gate-msg{font-family:var(--sans);font-size:12.5px;margin-top:.9rem;min-height:1.1em}
 #gate-msg.err{color:#ff8a7a}
 #gate-msg.ok{color:#6fe0a0}
-#gate-close{position:absolute;top:.55rem;right:.55rem;width:38px;height:38px;display:grid;place-content:center;
-  background:none;border:0;color:var(--ink3);font-size:20px;cursor:pointer;line-height:1}
+#gate-close{position:absolute;top:.6rem;right:.6rem;width:38px;height:38px;display:grid;place-content:center;
+  border-radius:999px;color:var(--ink2);font-size:19px;cursor:pointer;line-height:1;padding:0}
 #gate-close:hover{color:var(--ink)}
 @media(max-width:520px){ #gate-card{padding:1.7rem 1.3rem 1.4rem} }
+
+/* ═══ LIQUID GLASS ═══
+   Four layers make the effect read: a blurred and saturated backdrop,
+   a bright rim where the top edge catches light, a specular highlight
+   that tracks the pointer, and a springy press. The rim is the part
+   people actually register — real glass is brightest at its edge. */
+.glass{
+  position:relative;overflow:hidden;isolation:isolate;
+  background:rgba(255,255,255,.055);
+  -webkit-backdrop-filter:blur(16px) saturate(190%) brightness(1.10);
+  backdrop-filter:blur(16px) saturate(190%) brightness(1.10);
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.42),
+    inset 0 -1px 0 rgba(255,255,255,.07),
+    inset 0 0 20px rgba(255,255,255,.05),
+    0 8px 26px -12px rgba(0,0,0,.75);
+  transition:transform .32s cubic-bezier(.16,1,.3,1),
+             box-shadow .32s ease, border-color .32s ease,
+             background .32s ease, -webkit-backdrop-filter .32s ease;
+}
+.glass::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:
+    radial-gradient(150px circle at var(--gx,50%) var(--gy,0%), rgba(255,255,255,.24), transparent 62%),
+    linear-gradient(140deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,0) 44%,
+                            rgba(255,255,255,0) 60%, rgba(255,255,255,.10) 100%);
+  opacity:.85;transition:opacity .32s ease;
+}
+.glass:hover{
+  border-color:rgba(255,255,255,.30);
+  background:rgba(255,255,255,.10);
+  -webkit-backdrop-filter:blur(20px) saturate(215%) brightness(1.16);
+  backdrop-filter:blur(20px) saturate(215%) brightness(1.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.60),
+    inset 0 -1px 0 rgba(255,255,255,.10),
+    inset 0 0 26px rgba(255,255,255,.09),
+    0 14px 34px -14px rgba(0,0,0,.8);
+  transform:translateY(-2px);
+}
+.glass:hover::before{opacity:1}
+.glass:active{transform:scale(.965) translateY(0);transition-duration:.09s}
+@media(max-width:900px){
+  .glass{-webkit-backdrop-filter:blur(11px) saturate(170%);backdrop-filter:blur(11px) saturate(170%)}
+  .glass:hover{transform:none}
+}
 #tiltbtn{
   position:fixed;left:50%;transform:translateX(-50%);
   bottom:max(1.1rem, env(safe-area-inset-bottom));
@@ -254,6 +301,7 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
 }
 #tiltbtn.show{display:inline-flex}
 #tiltbtn.gone{opacity:0;transform:translate(-50%,10px);pointer-events:none}
+#tiltbtn{border-radius:999px}
 #tiltbtn i{display:block;width:11px;height:16px;border:1.5px solid var(--gold);border-radius:6px;position:relative}
 #tiltbtn i::after{content:'';position:absolute;left:50%;top:2px;width:1.5px;height:4px;background:var(--gold);transform:translateX(-50%)}
 @media(max-width:900px){
@@ -326,13 +374,13 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
 <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
   <div id="gate-back"></div>
   <div id="gate-card">
-    <button id="gate-close" type="button" aria-label="Close">&times;</button>
+    <button id="gate-close" class="glass" type="button" aria-label="Close">&times;</button>
     <div class="kicker">One question</div>
     <h2 id="gate-title">Interested in algorithmic trading strategies?</h2>
     <p>I build and trade systematic strategies across FX, crypto and derivatives. If that's something you'd want to hear more about, I'll get in touch.</p>
     <div class="gate-row" id="gate-choice">
-      <button class="btn solid" type="button" id="gate-yes">Yes</button>
-      <button class="btn" type="button" id="gate-no">No thanks</button>
+      <button class="btn solid glass" type="button" id="gate-yes">Yes</button>
+      <button class="btn glass" type="button" id="gate-no">No thanks</button>
     </div>
 
     <form id="gate-form" novalidate>
@@ -348,14 +396,14 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
       </label>
       <div id="gate-msg" role="status" aria-live="polite"></div>
       <div class="gate-row">
-        <button class="btn solid" type="submit" id="gate-send">Send</button>
+        <button class="btn solid glass" type="submit" id="gate-send">Send</button>
       </div>
       <p class="fine">Not an offer to invest and not investment advice. Trading carries risk of loss.</p>
     </form>
   </div>
 </div>
 
-<button id="tiltbtn" type="button" aria-label="Use device motion for parallax"><i></i>Tilt to look around</button>
+<button id="tiltbtn" class="glass" type="button" aria-label="Use device motion for parallax"><i></i>Tilt to look around</button>
 
 <div class="cur" id="cd"><div class="cur-dot"></div></div>
 <div class="cur" id="cr"><div class="cur-ring"></div></div>
@@ -397,15 +445,15 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
       <div class="hero-tag">Dubai &nbsp;·&nbsp; Surat &nbsp;·&nbsp; 24-hour markets</div>
       <h1 class="hero-name" id="heroname"><span class="ln1">ANAND</span><span class="ln2">Pandya</span></h1>
       <div class="hero-rule"></div>
-      <p class="hero-role">Quantitative trader and strategy developer. I build the systems I trade.</p>
+      <p class="hero-role">Quantitative trader and strategy developer.</p>
       <div class="hero-live">
         <span class="live-dot"></span><span>Experienced in</span>
         <span id="tape">Forex</span><span class="caret"></span>
       </div>
       <div class="hero-cta">
-        <a class="btn solid" href="#systems">See the systems</a>
-        <a class="btn" href="https://github.com/anandQuant" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="#contact">Start a conversation</a>
+        <a class="btn solid glass" href="#systems">See the systems</a>
+        <a class="btn glass" href="https://github.com/anandQuant" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn glass" href="#contact">Start a conversation</a>
       </div>
     </div>
     <div class="scroll-cue" id="cue"><span>Scroll to fly</span><i></i></div>
@@ -419,8 +467,8 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
   <section id="track" class="dock left">
     <div class="panel">
       <div class="head rv">
-        <div class="coord">Sector 01 — Track record</div>
-        <h2>Four years of putting money behind the research.</h2>
+        <div class="coord">01</div>
+        <h2>Track record</h2>
       </div>
       <div class="stats rv">
         <div class="stat"><b><span data-count="4" data-dec="0">0</span><i>+</i></b><small>Years trading live capital</small></div>
@@ -436,9 +484,9 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
   <section id="work" class="dock right">
     <div class="panel">
       <div class="head rv">
-        <div class="coord">Sector 02 — Career</div>
-        <h2>Discretionary first, systematic now.</h2>
-        <p>Every strategy here was researched, coded, risk-framed and traded with real capital.</p>
+        <div class="coord">02</div>
+        <h2>Career</h2>
+        <p>Discretionary first, systematic now.</p>
       </div>
       <div class="tl rv">
         <article class="job now">
@@ -488,15 +536,15 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
   <section id="systems" class="dock left">
     <div class="panel wide">
       <div class="head rv">
-        <div class="coord">Sector 03 — Open source</div>
-        <h2>Eleven systems, from order books to LLM agents.</h2>
-        <p>Market microstructure in C++, research in Python, live indicators in MQL5.</p>
+        <div class="coord">03</div>
+        <h2>Systems</h2>
+        <p>Eleven, all open source. C++, Python, MQL5.</p>
       </div>
       <div class="filters rv" id="filters">
-        <button class="on" data-f="all">All 11</button>
-        <button data-f="cpp">C++</button>
-        <button data-f="py">Python</button>
-        <button data-f="mql">MQL5</button>
+        <button class="on glass" data-f="all">All 11</button>
+        <button class="glass" data-f="cpp">C++</button>
+        <button class="glass" data-f="py">Python</button>
+        <button class="glass" data-f="mql">MQL5</button>
       </div>
       <div class="grid rv" id="grid">
         <a class="card" data-lang="cpp" href="https://github.com/anandQuant/L3-Order-Flow-Visualizer-Spoofing-Detection-Engine" target="_blank" rel="noopener">
@@ -574,8 +622,8 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
   <section id="craft" class="dock right">
     <div class="panel">
       <div class="head rv">
-        <div class="coord">Sector 04 — Capability</div>
-        <h2>Idea to live position, end to end.</h2>
+        <div class="coord">04</div>
+        <h2>Capability</h2>
       </div>
       <div class="stack rv">
         <div><div class="skill-h">Markets I trade</div>
@@ -593,14 +641,15 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
   <section id="study" class="dock left">
     <div class="panel">
       <div class="head rv">
-        <div class="coord">Sector 05 — Study</div>
-        <h2>Formal training, still ongoing.</h2>
+        <div class="coord">05</div>
+        <h2>Study</h2>
       </div>
       <div class="stack rv">
         <div><div class="skill-h">Degrees</div>
-          <div class="deg"><h3>Master in Financial Engineering</h3><p>WorldQuant University</p><time>2026 — present</time></div>
-          <div class="deg"><h3>Bachelor in Computer Applications</h3><p>Sutex Bank College, Surat</p><time>Graduated 2025</time></div></div>
+          <div class="deg"><h3>Master in Financial Engineering</h3><p>WorldQuant University (USA)</p><time>2026 — present</time></div>
+          <div class="deg"><h3>Bachelor in Computer Applications</h3><p>Veer Narmad South Gujarat University, Surat</p><time>Graduated 2025</time></div></div>
         <div><div class="skill-h">Certifications</div>
+          <div class="deg"><h3>Foundations of Financial Markets</h3><p>WorldQuant University (USA)</p></div>
           <div class="deg"><h3>CS50 Python</h3><p>Harvard University via edX</p></div>
           <div class="deg"><h3>CS50 C++</h3><p>Harvard University via edX</p></div>
           <div class="deg"><h3>Smart Money Concepts</h3><p>ICT 2018 mentorship program</p></div></div>
@@ -613,17 +662,20 @@ footer{padding:1.5rem var(--pad);border-top:1px solid var(--line2);display:flex;
   <section id="contact" class="dock right">
     <div class="panel">
       <div class="head rv">
-        <div class="coord">Sector 06 — Contact</div>
-        <h2>Tell me what you're building.</h2>
+        <div class="coord">06</div>
+        <h2>Contact</h2>
       </div>
       <div class="rv">
         <a class="mailto" href="mailto:pandyaanand21@gmail.com">pandyaanand21@gmail.com</a>
         <div class="links">
-          <a class="btn" href="mailto:pandyaanand21@gmail.com">Email</a>
-          <a class="btn" href="https://www.linkedin.com/in/pandya-anand-8b877a244/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn" href="https://github.com/anandQuant" target="_blank" rel="noopener">GitHub</a>
+          <button class="btn solid glass" type="button" id="gate-open">Interested in algo strategies?</button>
         </div>
-        <p class="avail">Open to <b>quant research collaborations</b>, <b>proprietary trading roles</b> and <b>algorithmic strategy development</b> across global markets. Based between India and Dubai, working remote or on site.</p>
+        <div class="links" style="margin-top:.6rem">
+          <a class="btn glass" href="mailto:pandyaanand21@gmail.com">Email</a>
+          <a class="btn glass" href="https://www.linkedin.com/in/pandya-anand-8b877a244/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn glass" href="https://github.com/anandQuant" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <p class="avail">Open to <b>quant research</b>, <b>proprietary trading</b> and <b>strategy development</b>. India and Dubai, remote or on site.</p>
       </div>
     </div>
   </section>
@@ -647,10 +699,10 @@ var mobile  = window.innerWidth < 820 || coarse;
    fullscreen passes at full density. One table decides everything,
    and the frame-time watchdog below can step it down further. */
 var Q = mobile ? {
-  pr:1.6, stars:22000, field:2400, motes:45, rocks:40,
+  pr:1.6, stars:15000, field:2400, motes:45, rocks:40,
   cluster:[360,260], steps:60, blurs:2, greebles:1
 } : {
-  pr:2, stars:110000, field:9000, motes:170, rocks:90,
+  pr:2, stars:62000, field:9000, motes:170, rocks:90,
   cluster:[700,520], steps:165, blurs:3, greebles:4
 };
 var noLens  = /[?&]nolens/.test(location.search);
@@ -693,9 +745,9 @@ var VERT = [
 '  vec4 mv = modelViewMatrix * vec4(p,1.0);',
 '  float dist = max(-mv.z, 0.6);',
 '  gl_Position = projectionMatrix * mv;',
-'  gl_PointSize = min(uSize * aSize * uPR * (60.0/dist), 26.0*uPR);',
+'  gl_PointSize = clamp(uSize * aSize * uPR * (60.0/dist), 1.7*uPR, 22.0*uPR);',
 '  vColor = aColor;',
-'  vFade = exp(-dist*0.010) * (0.80 + 0.20*sin(uTime*1.7 + aSeed*6.2831));',
+'  vFade = exp(-dist*0.0035) * (0.86 + 0.14*sin(uTime*1.7 + aSeed*6.2831));',
 '}'].join('\n');
 
 var FRAG = [
@@ -704,9 +756,12 @@ var FRAG = [
 '  vec2 uv = gl_PointCoord - vec2(0.5);',
 '  float d = length(uv);',
 '  if(d > 0.5) discard;',
-'  float k = 1.0 - d*2.0;',
-'  float a = pow(k,9.0) + pow(k,2.2)*0.16;',
-'  gl_FragColor = vec4(vColor*(0.55 + 0.45*pow(k,6.0)), a*vFade);',
+/* solid disc out to ~a third of the radius, then a tight halo.
+   A smooth falloff looks like haze once a star is only 2px wide. */
+'  float core = 1.0 - smoothstep(0.06, 0.32, d);',
+'  float halo = pow(max(0.0, 1.0 - d*2.0), 3.5);',
+'  float a = min(1.0, core + halo*0.30);',
+'  gl_FragColor = vec4(vColor*(0.74 + 0.30*core), a*vFade);',
 '}'].join('\n');
 
 /* ══════════════════════════════════════════════════════════
@@ -1533,6 +1588,8 @@ function buildShip(){
   keyLight.target = ship; rimLight.target = ship;
   shipScene.add(keyLight, rimLight, fill);
 
+  buildRunner();
+
   shipPath = new THREE.CatmullRomCurve3([
     new THREE.Vector3(-36, 15,  15),
     new THREE.Vector3(-23, 12,   4),
@@ -1542,10 +1599,112 @@ function buildShip(){
   ]);
 }
 
+
+/* ══════════════ INBOUND CRAFT ══════════════
+   A second, much smaller ship that runs in from the right and heads
+   for the galactic core, then loops. Unlike the ring station this one
+   is built to be read at distance: a dark silhouette with bright
+   engines and an ion trail behind it, since at this scale the exhaust
+   is the only part the eye will really catch. */
+var runner, runnerTrail, runnerPath, runnerGlow = [];
+
+function buildRunner(){
+  runner = new THREE.Group();
+
+  var hull  = new THREE.MeshStandardMaterial({color:0x9fa6b0, roughness:.52, metalness:.25, transparent:true});
+  var dark  = new THREE.MeshStandardMaterial({color:0x2b3038, roughness:.78, metalness:.15, transparent:true});
+  var lampM = new THREE.MeshBasicMaterial({color:0x9fd8ff, transparent:true});
+
+  /* fuselage, nose forward along +Z */
+  var body = new THREE.Mesh(new THREE.CylinderGeometry(.13,.17,1.5,14), hull);
+  body.rotation.x = Math.PI/2;
+  runner.add(body);
+  var nose = new THREE.Mesh(new THREE.ConeGeometry(.13,.62,14), hull);
+  nose.rotation.x = Math.PI/2; nose.position.z = 1.05;
+  runner.add(nose);
+
+  /* swept wings and two nacelles */
+  for(var w=-1; w<=1; w+=2){
+    var wing = new THREE.Mesh(new THREE.BoxGeometry(.62,.035,.42), dark);
+    wing.position.set(w*.42, 0, -.20);
+    wing.rotation.y = w*0.34;
+    runner.add(wing);
+    var nac = new THREE.Mesh(new THREE.CylinderGeometry(.075,.09,.66,10), hull);
+    nac.rotation.x = Math.PI/2;
+    nac.position.set(w*.62, 0, -.30);
+    runner.add(nac);
+    var bell = new THREE.Mesh(new THREE.CircleGeometry(.082,12), lampM);
+    bell.position.set(w*.62, 0, -.64);
+    bell.rotation.y = Math.PI;
+    runner.add(bell);
+  }
+  var tail = new THREE.Mesh(new THREE.BoxGeometry(.035,.40,.34), dark);
+  tail.position.set(0,.20,-.42);
+  runner.add(tail);
+
+  /* engine bloom — the part that actually reads at range */
+  for(var e=-1; e<=1; e+=2){
+    var gl = new THREE.Mesh(new THREE.PlaneGeometry(.85,.85),
+      new THREE.MeshBasicMaterial({map:radialTex('rgba(190,232,255,.95)','rgba(96,168,255,.28)',.14),
+        transparent:true, blending:THREE.AdditiveBlending, depthWrite:false}));
+    gl.position.set(e*.62, 0, -.74);
+    runner.add(gl); runnerGlow.push(gl);
+  }
+
+  runnerTrail = plume(plumeTex(150,205,255), .38);
+  runnerTrail.scale.set(1.15, 7.0, 1.15);
+  runnerTrail.rotation.x = -Math.PI/2;   /* plume runs along −Y locally → aft */
+  runner.add(runnerTrail);
+
+  runner.scale.setScalar(1.15);
+  shipScene.add(runner);
+
+  /* in from the right, curving down to the core */
+  runnerPath = new THREE.CatmullRomCurve3([
+    new THREE.Vector3( 58, 26, 30),
+    new THREE.Vector3( 44, 20, 24),
+    new THREE.Vector3( 31, 15, 17),
+    new THREE.Vector3( 20, 10, 10),
+    new THREE.Vector3( 11,  5,  5),
+    new THREE.Vector3(  4,  2,  2)
+  ]);
+}
+
+var _r1 = new THREE.Vector3(), _r2 = new THREE.Vector3();
+function updateRunner(t){
+  if(!runner) return;
+  var PERIOD = 38;                       /* seconds for one run */
+  var u = (t % PERIOD) / PERIOD;
+  runnerPath.getPointAt(u, _r1);
+  runner.position.copy(_r1);
+  runnerPath.getPointAt(Math.min(u+0.012, 1), _r2);
+  if(_r2.distanceToSquared(_r1) > 1e-6) runner.lookAt(_r2);
+
+  /* Fade in on arrival and out as it nears the core. The craft runs on
+     its own clock while the camera runs on scroll, so the two can end
+     up anywhere relative to each other — a proximity fade guarantees it
+     never balloons across the frame no matter where you happen to be. */
+  var vis = Math.min(1, u/0.06) * Math.max(0, Math.min(1, (0.92-u)/0.30));
+  var dCam = runner.position.distanceTo(camera.position);
+  vis *= Math.min(1, Math.max(0, (dCam - 5) / 7));
+  runner.visible = vis > 0.02;
+  if(!runner.visible) return;
+  runner.traverse(function(o){
+    if(o.material && o.material.transparent) o.material.opacity =
+      (o === runnerTrail ? 0.38 : 1) * vis;
+  });
+  runnerTrail.children.forEach(function(m){ m.material.opacity = 0.34*vis; });
+  runnerGlow.forEach(function(g){
+    g.material.opacity = vis*(0.78 + 0.22*Math.sin(t*7.0));
+    g.lookAt(camera.position);
+  });
+}
+
 var _s1=new THREE.Vector3(), _s2=new THREE.Vector3();
 var _key=new THREE.Vector3(-7,5,9), _rim=new THREE.Vector3(6,-2,-9);
 function updateShip(p){
   if(!ship) return;
+  updateRunner(simTime);
   var t = (p - 0.14)/0.86;
   ship.visible = t > 0;
   if(!ship.visible) return;
@@ -1567,7 +1726,8 @@ function updateShip(p){
   rimLight.position.copy(ship.position).add(_rim);
 }
 function drawShipTo(target){
-  if(!ship || !ship.visible) return;
+  if(!shipScene) return;
+  if((!ship || !ship.visible) && (!runner || !runner.visible)) return;
   renderer.setRenderTarget(target || null);
   renderer.autoClear = false;
   renderer.clearDepth();
@@ -1645,7 +1805,7 @@ function initBloom(){
   rtL  = makeRT(w, h, true);
   rtB1 = makeRT(w/2, h/2, false);
   rtB2 = makeRT(w/2, h/2, false);
-  brightMat = new THREE.ShaderMaterial({uniforms:{tD:{value:null},uThresh:{value:0.55}},
+  brightMat = new THREE.ShaderMaterial({uniforms:{tD:{value:null},uThresh:{value:0.72}},
     vertexShader:QUAD_VERT, fragmentShader:BRIGHT_FRAG, depthTest:false, depthWrite:false});
   blurMat = new THREE.ShaderMaterial({uniforms:{tD:{value:null},
     uTexel:{value:new THREE.Vector2(2/w,2/h)}, uDir:{value:new THREE.Vector2(1,0)}, uRad:{value:1}},
@@ -1687,6 +1847,51 @@ function initPost(){
   usePost = true;
 }
 
+
+/* ══════════════ WARP STREAKS ══════════════
+   Nothing conveys speed like something whipping past close to the
+   lens. Short segments scattered through a box that wraps around the
+   camera, so they stream by with real parallax, stretched along
+   whichever way the camera is actually travelling and fading out
+   entirely when you stop scrolling. */
+var warp, warpPos, warpBase = [], WARPN = 0;
+function buildWarp(){
+  WARPN = mobile ? 110 : 280;
+  warpPos = new Float32Array(WARPN*6);
+  for(var i=0;i<WARPN;i++){
+    warpBase.push(new THREE.Vector3(
+      (Math.random()-.5)*70, (Math.random()-.5)*46, (Math.random()-.5)*70));
+  }
+  var g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(warpPos,3));
+  warp = new THREE.LineSegments(g, new THREE.LineBasicMaterial({
+    color:0xdbe6ff, transparent:true, opacity:0,
+    blending:THREE.AdditiveBlending, depthWrite:false}));
+  warp.frustumCulled = false;
+  scene.add(warp);
+}
+var _wd = new THREE.Vector3(), _wp = new THREE.Vector3();
+function updateWarp(vel3){
+  if(!warp) return;
+  var amt = Math.min(vel3.length()*2.2, 1);
+  warp.material.opacity = amt*0.42;
+  if(amt < 0.015) return;
+  var SX=70, SY=46;
+  for(var i=0;i<WARPN;i++){
+    _wd.copy(warpBase[i]).sub(camera.position);
+    _wd.x = ((_wd.x % SX)+SX*1.5)%SX - SX/2;
+    _wd.y = ((_wd.y % SY)+SY*1.5)%SY - SY/2;
+    _wd.z = ((_wd.z % SX)+SX*1.5)%SX - SX/2;
+    _wp.copy(camera.position).add(_wd);
+    var k=i*6, L = 16 + amt*26;
+    warpPos[k]=_wp.x;   warpPos[k+1]=_wp.y;   warpPos[k+2]=_wp.z;
+    warpPos[k+3]=_wp.x - vel3.x*L;
+    warpPos[k+4]=_wp.y - vel3.y*L;
+    warpPos[k+5]=_wp.z - vel3.z*L;
+  }
+  warp.geometry.attributes.position.needsUpdate = true;
+}
+
 function initSpace(){
   renderer = new THREE.WebGLRenderer({canvas:document.getElementById('space'),antialias:false,alpha:false,powerPreference:'high-performance'});
   renderer.setSize(innerWidth,innerHeight);
@@ -1705,13 +1910,17 @@ function initSpace(){
 
   var orb = new Float32Array(COUNT*3), col = new Float32Array(COUNT*3);
   var siz = new Float32Array(COUNT), tilt = new Float32Array(COUNT), phase = new Float32Array(COUNT);
-  var bulgeHot = new THREE.Color(0xfff3dc), bulgeCool = new THREE.Color(0xffc172);
-  var armBlue = new THREE.Color(0xd6e8ff), armDeep = new THREE.Color(0x8ab4ff);
+  var bulgeHot = new THREE.Color(0xffeec6), bulgeCool = new THREE.Color(0xffab4e);
+  var armBlue = new THREE.Color(0xb4d4ff), armDeep = new THREE.Color(0x6b9dff);
   var hii = new THREE.Color(0xff87bd);
   var BULGE = Math.floor(COUNT*0.16);
 
   for(var i=0;i<COUNT;i++){
-    var i3=i*3, A,B,y,ti,ph,c,b, sz = 0.45 + Math.random()*0.8;
+    var i3=i*3, A,B,y,ti,ph,c,b;
+    /* steep luminosity function: mostly faint, a handful bright.
+       A uniform spread is what made the field read as even sand. */
+    var sz = 0.30 + Math.pow(Math.random(), 3.0)*1.7;
+    var lum = 0.26 + Math.pow(Math.random(), 2.2)*1.45;
     if(i < BULGE){
       A = Math.pow(Math.random(),2.3)*4.6;
       B = A*(0.94+Math.random()*0.06);
@@ -1721,18 +1930,18 @@ function initSpace(){
       b = 0.8 + 0.65*(1 - A/4.6);
       sz *= 0.85;
     } else {
-      if(Math.random() < 0.34){
+      if(Math.random() < 0.44){
         var cl = clumps[(Math.random()*clumps.length)|0];
         A = cl[0] + gauss()*0.5;
         ph = cl[1] + gauss()*0.035;
-        if(Math.random() < 0.055){ c = hii.clone(); b = 1.6; sz *= 2.6; }
-        else { c = armBlue.clone().lerp(armDeep, Math.random()*0.65); b = 1.2; }
+        if(Math.random() < 0.085){ c = hii.clone(); b = 1.75; sz *= 2.8; }
+        else { c = armBlue.clone().lerp(armDeep, Math.random()*0.65); b = 0.85*lum + 0.35; }
       } else {
         A = INNER + Math.pow(Math.random(),0.58)*(RADIUS-INNER);
         ph = Math.random()*TAU;
         var t2 = A/RADIUS;
         c = armBlue.clone().lerp(bulgeCool, Math.max(0, 1 - t2*2.2));
-        b = 0.5 + 0.55*(1-t2);
+        b = (0.32 + 0.42*(1-t2)) * lum;
       }
       A = Math.max(A, INNER*0.6);
       B = A*(1-ECC)*(0.97+Math.random()*0.06);
@@ -1743,9 +1952,38 @@ function initSpace(){
     col[i3]=c.r*b; col[i3+1]=c.g*b; col[i3+2]=c.b*b;
     siz[i]=sz; tilt[i]=ti; phase[i]=ph;
   }
-  galaxyObj = cloud(orb,col,siz,tilt,phase, 0.115, mobile?1.45:1.35);
+  galaxyObj = cloud(orb,col,siz,tilt,phase, 0.115, mobile?1.35:1.22);
   galaxyObj.rotation.x = 0.05;
   scene.add(galaxyObj);
+
+  /* HII regions — the pink hydrogen clouds strung along the arms, and
+     the single most recognisable colour in a galaxy photograph. Blue
+     reflection nebulae sit beside them where young stars light up the
+     surrounding dust.
+
+     An arm crest lies where the tilted ellipses crowd, which is at the
+     tip of each major axis: angle = radius x TWIST. Parenting these to
+     the galaxy means they ride the pattern, and since the pattern is a
+     standing wave the clouds stay put on the arm while stars stream
+     through them. */
+  var nebN = mobile ? 12 : 26;
+  for(var nb=0; nb<nebN; nb++){
+    var nr  = 5.5 + Math.random()*18.5;
+    var arm = (Math.random()<0.5 ? 0 : Math.PI);
+    var na  = nr*TWIST + arm + (Math.random()-0.5)*0.16;
+    var pink = Math.random() < 0.68;
+    var sz2  = (pink ? 1.5 : 1.1) + Math.random()*2.1;
+    var tint = pink ? 'rgba(255,96,164,' : 'rgba(122,170,255,';
+    var neb  = new THREE.Mesh(new THREE.PlaneGeometry(sz2,sz2),
+      new THREE.MeshBasicMaterial({
+        map: radialTex(tint+'0.55)', tint+'0.10)', .22),
+        transparent:true, blending:THREE.AdditiveBlending,
+        depthWrite:false, opacity: pink ? .62 : .40 }));
+    neb.position.set(Math.cos(na)*nr, (Math.random()-0.5)*0.5, Math.sin(na)*nr);
+    neb.userData.spin = 0;
+    galaxyObj.add(neb);
+    dust.push(neb);
+  }
 
   var SN = Q.field;
   var so=new Float32Array(SN*3), sc=new Float32Array(SN*3), ss=new Float32Array(SN);
@@ -1756,13 +1994,13 @@ function initSpace(){
      brightness follows luminosity, compressed since an O star
      genuinely outshines an M dwarf by a factor of a million. */
   var CLASS = [
-    {p:0.0000003, c:0x9bb0ff, L:30000},   /* O */
-    {p:0.0013,    c:0xaabfff, L:  380},   /* B */
-    {p:0.0060,    c:0xcad7ff, L:   20},   /* A */
-    {p:0.0300,    c:0xf8f7ff, L:  3.5},   /* F */
-    {p:0.0760,    c:0xfff4ea, L:  1.0},   /* G */
-    {p:0.1210,    c:0xffd2a1, L: 0.35},   /* K */
-    {p:0.7645,    c:0xffcc6f, L: 0.05}    /* M */
+    {p:0.0000003, c:0x7f9bff, L:30000},   /* O — blue      */
+    {p:0.0013,    c:0x93b4ff, L:  380},   /* B — blue-white */
+    {p:0.0060,    c:0xbcd0ff, L:   20},   /* A — white-blue */
+    {p:0.0300,    c:0xf4f4ff, L:  3.5},   /* F — white      */
+    {p:0.0760,    c:0xffefcf, L:  1.0},   /* G — yellow     */
+    {p:0.1210,    c:0xffbe77, L: 0.35},   /* K — orange     */
+    {p:0.7645,    c:0xff9a48, L: 0.05}    /* M — red dwarf  */
   ];
   var tmpC = new THREE.Color();
   for(var s=0;s<SN;s++){
@@ -1773,11 +2011,11 @@ function initSpace(){
     var roll = Math.random(), acc = 0, cls = CLASS[6];
     for(var ci=0;ci<CLASS.length;ci++){ acc += CLASS[ci].p; if(roll <= acc){ cls = CLASS[ci]; break; } }
     tmpC.setHex(cls.c);
-    var bb = Math.min(1.5, 0.34*Math.pow(cls.L, 0.22)*(0.75+Math.random()*0.5));
+    var bb = Math.min(1.6, 0.46*Math.pow(cls.L, 0.13)*(0.78+Math.random()*0.44));
     sc[q]=tmpC.r*bb; sc[q+1]=tmpC.g*bb; sc[q+2]=tmpC.b*bb;
-    ss[s] = 0.35 + Math.min(1.5, Math.pow(cls.L, 0.16))*0.55;
+    ss[s] = 0.42 + Math.min(1.5, Math.pow(cls.L, 0.13))*0.62;
   }
-  scene.add(cloud(so,sc,ss,st2,sph, 0.006, 2.6));
+  scene.add(cloud(so,sc,ss,st2,sph, 0.006, 3.0));
 
   var NN = Q.motes;
   var np=new Float32Array(NN*3), nc=new Float32Array(NN*3);
@@ -1828,20 +2066,28 @@ function initSpace(){
     scene.add(ring); rings.push(ring);
   });
 
+  /* Approach high and wide, drop into the plane of the disc, run
+     through the arms and past the core at low altitude, swing out
+     by the star system, then climb away toward Gargantua. Most of
+     the journey is now spent inside the galaxy rather than above it. */
   camPath = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(  0, 9.0, 28),
-    new THREE.Vector3( 13, 5.2, 16),
-    new THREE.Vector3(  8, 1.6,  4),
-    new THREE.Vector3( -2,  .5, -1),
-    new THREE.Vector3(-13, 2.6, -9),
-    new THREE.Vector3( -3, 7.0,-22),
+    new THREE.Vector3(  0, 9.5, 30),
+    new THREE.Vector3( 15, 5.0, 17),
+    new THREE.Vector3( 10, 1.3,  6),
+    new THREE.Vector3(  2,  .4, -1),   /* core pass, almost in-plane */
+    new THREE.Vector3( -8,  .7, -6),   /* threading the far arm      */
+    new THREE.Vector3(-18, 2.2,-13),   /* out past the star system   */
+    new THREE.Vector3( -7, 6.5,-24),
     new THREE.Vector3(  5, 7.2,-32)
   ]);
   lookPath = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,0), new THREE.Vector3(0,0,-1),
-    new THREE.Vector3(-2,0,-5), new THREE.Vector3(-2,1,-12),
-    new THREE.Vector3(2,4,-28), new THREE.Vector3(4,6,-48)
+    new THREE.Vector3(0,0,0),      new THREE.Vector3(0,0,0),
+    new THREE.Vector3(0,0,-2),     new THREE.Vector3(-4,0,-6),
+    new THREE.Vector3(-14,-1,-10), new THREE.Vector3(-8,1,-18),
+    new THREE.Vector3(2,4,-30),    new THREE.Vector3(4,6,-52)
   ]);
+
+  buildWarp();
 
   try { buildDeepSpace(); } catch(e){ console.warn('deep space off:', e); sysGroup = null; }
 
@@ -1885,6 +2131,8 @@ function onResize(){
 var slowFrames = 0, quality = 1;
 
 var _p=new THREE.Vector3(), _l=new THREE.Vector3(), _a=new THREE.Vector3(), _b=new THREE.Vector3();
+var prevCam=new THREE.Vector3(), camVel=new THREE.Vector3();
+var _t1=new THREE.Vector3(), _t2=new THREE.Vector3(), bank=0;
 function render(){
   requestAnimationFrame(render);
   var dt = Math.min(clock.getDelta(), 0.05);
@@ -1896,14 +2144,30 @@ function render(){
   mSmooth.y += (mouse.y-mSmooth.y)*.06;
 
   var p = Math.min(Math.max(smoothP,0),1);
-  camPath.getPointAt(p,_p);
-  lookPath.getPointAt(p,_l);
 
+  /* Pace the flight instead of moving at one constant rate: ease
+     through the landmarks and accelerate across the empty stretches.
+     Integer k keeps the remap monotonic and still lands exactly on
+     0 and 1 at the ends. */
+  var K = 3, AMP = 0.55;
+  var pe = p - (AMP/(2*Math.PI*K))*Math.sin(2*Math.PI*K*p);
+
+  camPath.getPointAt(pe,_p);
+  lookPath.getPointAt(pe,_l);
+
+  prevCam.copy(camera.position);
   camera.position.set(
     _p.x + mSmooth.x*3.4,
     _p.y + mSmooth.y*2.1 + Math.sin(simTime*.4)*.22,
     _p.z + mSmooth.y*0.8
   );
+  camVel.copy(camera.position).sub(prevCam);
+
+  /* bank into the turns, the way anything with wings would */
+  camPath.getTangentAt(pe,_t1);
+  camPath.getTangentAt(Math.min(pe+0.03,1),_t2);
+  var turn = _t1.x*_t2.z - _t1.z*_t2.x;
+  bank += (Math.max(-0.38, Math.min(0.38, -turn*16)) - bank)*0.045;
 
   /* gravitational time dilation, dτ/dt = sqrt(1 − rs/r) */
   var dHole = camera.position.distanceTo(HOLE);
@@ -1912,7 +2176,7 @@ function render(){
   simTime += dt/dilation;
 
   camera.lookAt(_l);
-  camera.rotation.z = mSmooth.x*.055 + p*.14;
+  camera.rotation.z = mSmooth.x*.055 + p*.14 + bank;
 
   var warp = Math.min(vel*26, 20);
   camera.fov += ((60 + warp) - camera.fov)*.09;
@@ -1927,6 +2191,7 @@ function render(){
       dust[d].rotation.z += dust[d].userData.spin*.012;
     }
     near.rotation.y = simTime*.012;
+    updateWarp(camVel);
     updateDeepSpace(simTime);
     if(galaxyObj) galaxyObj.rotation.y = simTime*.035;
   }
@@ -2288,6 +2553,10 @@ var LEAD_MAILTO   = 'pandyaanand21@gmail.com';
   function asked(){ try{ return localStorage.getItem('ap_interest'); }catch(e){ return null; } }
 
   function open(){
+    choice.style.display = '';
+    form.classList.remove('on');
+    msg.className = ''; msg.textContent = '';
+    send.disabled = false;
     lastFocus = document.activeElement;
     gate.classList.add('on');
     requestAnimationFrame(function(){ gate.classList.add('in'); });
@@ -2371,7 +2640,27 @@ var LEAD_MAILTO   = 'pandyaanand21@gmail.com';
     });
   });
 
-  if(!asked()) setTimeout(open, 2600);
+  /* ?popup on the URL forces it open regardless of a stored answer,
+     which is the only sane way to test it after you've already
+     replied once. */
+  var opener = document.getElementById('gate-open');
+  if(opener) opener.addEventListener('click', open);
+
+  var forced = /[?&]popup/.test(location.search);
+  if(forced || !asked()) setTimeout(open, forced ? 900 : 2600);
+})();
+
+
+/* the specular highlight follows the pointer across any glass surface */
+(function(){
+  if(reduced) return;
+  document.addEventListener('pointermove', function(e){
+    var g = e.target.closest ? e.target.closest('.glass') : null;
+    if(!g) return;
+    var r = g.getBoundingClientRect();
+    g.style.setProperty('--gx', ((e.clientX-r.left)/r.width*100)+'%');
+    g.style.setProperty('--gy', ((e.clientY-r.top)/r.height*100)+'%');
+  }, {passive:true});
 })();
 
 var burger = document.getElementById('burger'), menu = document.getElementById('menu');
